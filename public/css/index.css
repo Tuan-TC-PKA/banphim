@@ -1,0 +1,56 @@
+/* Reset Button Style */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-buttons a, 
+.action-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.action-buttons a i, 
+.action-buttons button i {
+    font-size: 1rem;
+}
+
+/* Detail Button */
+.detail-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.detail-btn:hover {
+    background-color: #2563eb;
+}
+
+/* Edit Button */
+.edit-btn {
+    background-color: #10b981;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #059669;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}

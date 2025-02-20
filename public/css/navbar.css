@@ -1,0 +1,261 @@
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.logo {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    margin-left: 35px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.nav-menu li a:hover {
+    color: #555;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Rewards Style */
+.nav-rewards {
+    margin-left: 30px;
+    font-size: 0.9em;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.nav-rewards:hover {
+    color: #555;
+}
+
+.nav-rewards span:first-child {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Notification Bell Style */
+.nav-notification {
+    position: relative;
+    margin-left: 30px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.nav-notification:hover {
+    color: #555;
+}
+
+.nav-notification::before { /* Bell Icon (using Unicode character as placeholder) */
+    content: '\f0f3'; /* Font Awesome bell icon character */
+    font-family: 'Font Awesome 6 Free'; /* Or your Font Awesome icon font family */
+    font-weight: 900; /* Solid style */
+}
+
+
+.nav-notification::after { /* Red notification dot */
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+/* Cart Icon Style */
+.nav-cart {
+    position: relative;
+    margin-left: 30px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.nav-cart:hover {
+    color: #555;
+}
+
+.nav-cart::before { /* Cart Icon (using Unicode character as placeholder) */
+    content: '\f07a'; /* Font Awesome shopping cart icon character */
+    font-family: 'Font Awesome 6 Free'; /* Or your Font Awesome icon font family */
+    font-weight: 900; /* Solid style */
+}
+
+
+/* User Icon Style */
+.nav-user {
+    margin-left: 30px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.nav-user:hover {
+    color: #555;
+}
+
+.nav-user::before { /* User Icon (using Unicode character as placeholder) */
+    content: '\f007'; /* Font Awesome user icon character */
+    font-family: 'Font Awesome 6 Free'; /* Or your Font Awesome icon font family */
+    font-weight: 900; /* Solid style */
+}
+
+/* User Dropdown Styling */
+.nav-user-dropdown {
+    position: relative;
+    margin-left: 30px;
+}
+
+.nav-user-dropdown-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.nav-user-dropdown-trigger:focus {
+    outline: none;
+}
+
+.nav-user-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: none; /* Initially hidden */
+    z-index: 1010;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* Slide down transition */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.nav-user-dropdown-menu.show { /* Class to show dropdown */
+    display: block; /* Make dropdown visible when 'show' class is present */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Slide in transition */
+}
+
+
+.nav-user-dropdown-menu .nav-dropdown-item { /* Style for dropdown items (Profile, Logout) */
+    display: block;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: #333;
+    text-align: left;
+    white-space: nowrap;
+    background: none; /* Remove button background */
+    border: none;       /* Remove button border */
+    width: 100%;       /* Make button full width of dropdown */
+    text-align: left;   /* Ensure text is left-aligned */
+    cursor: pointer;    /* Make it look clickable */
+}
+
+
+.nav-user-dropdown-menu .nav-dropdown-item:hover { /* Hover style for dropdown items */
+    background-color: #f4f4f4;
+    color: black;
+}
+
+/* Nav button styles for Login and Signup */
+.nav-login-btn, .nav-signup-btn {
+    text-decoration: none;
+    color: #333;
+    margin-left: 30px; /* Adjust spacing as needed */
+    font-size: 0.95em; /* Match nav actions font size */
+    transition: color 0.3s ease;
+    font-weight: bold; /* Make Login/Signup buttons bold */
+}
+
+.nav-login-btn:hover, .nav-signup-btn:hover {
+    color: #555; /* Hover color */
+    text-decoration: underline; /* Add underline on hover for better visual feedback */
+}
+
+/* Responsive adjustments for navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+    .nav-menu {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-menu li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    .nav-actions {
+        margin-top: 15px;
+        justify-content: center;
+    }
+    .nav-actions a, .search-icon, .cart-icon, .nav-rewards, .nav-notification, .nav-user {
+        margin: 0 10px;
+    }
+    .nav-user-dropdown {
+        margin-left: 10px; /* Adjust dropdown spacing in responsive mode */
+    }
+}

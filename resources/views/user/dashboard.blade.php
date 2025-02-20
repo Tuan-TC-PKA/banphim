@@ -16,7 +16,7 @@
         Bang & Olufsen Sale <a href="#">Save up to 60%. SHOP NOW</a>
     </div>
 
-    @include('components.navbar-logged-out')
+    @include('components.navbar-logged-in')
 
     <section class="hero-section">
         <div class="hero-content">

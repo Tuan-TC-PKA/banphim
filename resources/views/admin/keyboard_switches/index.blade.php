@@ -48,16 +48,29 @@
                                 {{ $rs->actuation_force }} g 
                             </td>
                             <td class="px-6 py-4 w-36">
-                                <div class="h-14 pt-5">
-                                    <a href="{{ route('admin.products.show', $rs->product->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a> 
-                                    <a href="{{ route('admin.products.edit', $rs->product->id)}}" class="font-medium text-green-600 dark:text-green-500 hover:underline pl-2">Edit</a> 
-                                    <form action="{{ route('admin.products.destroy', $rs->product->id) }}" method="POST"  
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
-                                    </form>
-                                </div>
-                            </td>
+    <div class="action-buttons">
+        <!-- Detail Button -->
+        <a href="{{ route('admin.products.show', $rs->product->id) }}" class="detail-btn">
+            <i class="fas fa-info-circle"></i> Detail
+        </a>
+
+        <!-- Edit Button -->
+        <a href="{{ route('admin.products.edit', $rs->product->id) }}" class="edit-btn">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+
+        <!-- Delete Button (inside form) -->
+        <form action="{{ route('admin.products.destroy', $rs->product->id) }}" method="POST"
+              onsubmit="return confirm('Are you sure you want to delete this product?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-btn">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+        </form>
+    </div>
+</td>
+
                         </tr>
                     @endforeach
                 @else

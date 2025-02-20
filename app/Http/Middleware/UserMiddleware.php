@@ -15,10 +15,16 @@ class UserMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
-        if(Auth::user()->userType == 'user') {
-            return $next($request);
-        }
-        return redirect()->back();
+{
+    if (!Auth::check()) {
+        return redirect()->route('login'); // Chuyển hướng nếu chưa đăng nhập
     }
+
+    if (Auth::user()->userType === 'user') {
+        return $next($request);
+    }
+
+    abort(403, 'Unauthorized'); // Trả về lỗi nếu không phải user
+}
+
 }

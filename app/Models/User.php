@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->role === 'admin'; // Hoặc logic kiểm tra quyền admin của bạn
     }
+    public function isUser()
+    {
+        return $this->role === 'user'; // Hoặc logic kiểm tra quyền user của bạn
+    }
 }

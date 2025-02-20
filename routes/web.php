@@ -9,7 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminKeycapController;   // Corrected controller names
 use App\Http\Controllers\AdminKeyboardController;
 use App\Http\Controllers\AdminSwitchController;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,11 +26,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Dashboard Route
 Route::get('/dashboard', function () {
-    return view('dashboard');
+        if (Auth::user()->userType == 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::user()->userType == 'user') {
+            return redirect()->route('user.dashboard');
+        }
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 // Profile Routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,6 +45,7 @@ require __DIR__.'/auth.php';
 // User Dashboard Routes
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    
 });
 
 // Admin Routes - Protected by 'adminMiddleware'
