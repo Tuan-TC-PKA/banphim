@@ -1,4 +1,3 @@
-{{-- resources/views/welcome.blade.php --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drop Clone - Welcome</title>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
-    <div class="top-bar">
-        Bang & Olufsen Sale <a href="#">Save up to 60%. SHOP NOW</a>
-    </div>
+    
 
     @include('components.navbar-logged-out')
 

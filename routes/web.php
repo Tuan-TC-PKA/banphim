@@ -10,6 +10,8 @@ use App\Http\Controllers\AdminKeycapController;   // Corrected controller names
 use App\Http\Controllers\AdminKeyboardController;
 use App\Http\Controllers\AdminSwitchController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShopController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/shop', function () {
+    return view('shop');
+});
+
+Route::prefix('shop')->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/category/{category}', [ShopController::class, 'category'])->name('shop.category');
+    Route::get('/search', [ShopController::class, 'search'])->name('shop.search');
+    Route::get('/product/{id}', [ShopController::class, 'show'])->name('products.info');
+});
 Route::get('/dashboard', function () {
         if (Auth::user()->userType == 'admin') {
             return redirect()->route('admin.dashboard');
@@ -45,6 +57,14 @@ require __DIR__.'/auth.php';
 // User Dashboard Routes
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+        // Thêm Cart Routes
+        Route::prefix('cart')->group(function () {
+            Route::get('/', [CartController::class, 'index'])->name('cart.index');
+            Route::post('/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+            Route::patch('/update/{id}', [CartController::class, 'update'])->name('cart.update');
+            Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+            Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+        });
     
 });
 

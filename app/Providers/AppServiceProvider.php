@@ -2,6 +2,8 @@
 use App\Models\Product;
 use App\Policies\ProductPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Pagination\Paginator;
+
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
@@ -11,5 +13,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+        Paginator::useBootstrap();
     }
 }
