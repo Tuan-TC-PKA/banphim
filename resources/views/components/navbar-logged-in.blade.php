@@ -1,45 +1,66 @@
 {{-- resources/views/components/navbar-logged-in.blade.php --}}
-<link rel="stylesheet" href="{{ asset('build/assets/css/navbar.css') }}">
-<script src="{{ asset('build/assets/js/navbar.js') }}" defer></script>
-<nav class="navbar">
-    <div class="navbar-container">
-        <a href="/" class="logo">DROP</a>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="#">WHAT'S NEW</a></li>
-                <li class="nav-menu li">
-                    <a href="">SHOP</a>  {{-- Updated href to route('shop') --}}
-                </li>
-                <li><a href="#">SALE</a></li>
-                <li><a href="#">COMMUNITY</a></li>
-            </ul>
-        </nav>
-        <div class="nav-actions">
-            <span class="search-icon"></span>
-            <a href="#" class="nav-rewards">
-                <span>$0</span>
-                <span>Rewards</span>
-            </a>
-            <span class="nav-notification"></span>
-            <span class="nav-cart"></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <!-- Liên kết đến Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Liên kết đến Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- Liên kết đến file CSS tùy chỉnh -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <!-- Nút toggle cho mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent" aria-controls="navbarContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="nav-user-dropdown">
-                <button class="nav-user-dropdown-trigger" id="dropdownUserButton" data-dropdown-toggle="user-dropdown" aria-expanded="false">
-                    <span class="nav-user"></span>
-                </button>
+            <!-- Logo -->
+            <a href="/" class="navbar-brand">DROP</a>
 
-                <div class="nav-user-dropdown-menu" aria-labelledby="dropdownUserButton">
-                    <a href="{{ route('profile.edit') }}" class="nav-dropdown-item">
-                        {{ __('Profile') }}
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-dropdown-item">
-                            {{ __('Log Out') }}
-                        </button>
-                    </form>
+            <!-- Các icon luôn hiển thị -->
+            <div class="d-flex align-items-center order-lg-2 ms-auto"> {{-- Đã sửa thành ms-auto --}}
+                <span class="search-icon fas fa-search mx-2"></span>
+                <span class="nav-notification fas fa-bell mx-2"></span>
+                <span class="nav-cart fas fa-shopping-cart mx-2"></span>
+                <div class="dropdown ms-2">
+                    <button class="btn nav-user-dropdown-trigger" type="button"
+                            id="dropdownUserButton" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="nav-user fas fa-user"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUserButton">
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item">{{ __('Log Out') }}</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+
+            <!-- Nội dung navbar (các mục menu) -->
+            <div class="collapse navbar-collapse order-lg-1 justify-content-center" id="navbarContent">
+                <ul class="navbar-nav w-100 mb-2 mb-lg-0"> {{-- Đã thêm class w-100 vào đây --}}
+                    <li class="nav-item"><a class="nav-link" href="#">WHAT'S NEW</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">SHOP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">SALE</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">COMMUNITY</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <!-- Liên kết đến Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
