@@ -17,6 +17,29 @@
     .text-truncate {
         max-width: 100%;
     }
+
+    .category-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow: hidden;
+    }
+    
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .category-card img {
+        transition: transform 0.3s;
+    }
+    
+    .category-card:hover img {
+        transform: scale(1.1);
+    }
+    
+    .category-card span {
+        font-size: 1.2rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
 </style>
 </head> <body> 
 @auth
@@ -26,13 +49,60 @@
 @endauth
 <div class="container-fluid mt-5 pt-5">
     <!-- Category Navigation -->
-    <div class="row mb-4">
+    <div class="row mb-5">
         <div class="col-12">
-            <div class="d-flex overflow-auto pb-3">
-                <a href="{{ route('shop.index') }}" class="btn btn-outline-primary me-2">All Products</a>
-                <a href="{{ route('shop.category', 'keyboard') }}" class="btn btn-outline-primary me-2">Mechanical Keyboards</a>
-                <a href="{{ route('shop.category', 'keycap') }}" class="btn btn-outline-primary me-2">Keycaps</a>
-                <a href="{{ route('shop.category', 'switch') }}" class="btn btn-outline-primary me-2">Switches</a>
+            <div class="d-flex justify-content-center gap-4">
+                <!-- All Products -->
+                <a href="{{ route('shop.index') }}" class="text-decoration-none">
+                    <div class="category-card position-relative" style="width: 200px; height: 150px;">
+                        <img src="{{ asset('storage/categories/all.jpg') }}" 
+                             class="w-100 h-100 object-fit-cover rounded" 
+                             alt="All Products">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                             style="background: rgba(0,0,0,0.4);">
+                            <span class="text-white fw-bold">All Products</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Keyboards -->
+                <a href="{{ route('shop.category', 'keyboard') }}" class="text-decoration-none">
+                    <div class="category-card position-relative" style="width: 200px; height: 150px;">
+                        <img src="{{ asset('storage/categories/keyboard.jpg') }}" 
+                             class="w-100 h-100 object-fit-cover rounded" 
+                             alt="Mechanical Keyboards">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                             style="background: rgba(0,0,0,0.4);">
+                            <span class="text-white fw-bold">Keyboards</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Keycaps -->
+                <a href="{{ route('shop.category', 'keycap') }}" class="text-decoration-none">
+                    <div class="category-card position-relative" style="width: 200px; height: 150px;">
+                        <img src="{{ asset('storage/categories/keycap.jpg') }}" 
+                             class="w-100 h-100 object-fit-cover rounded" 
+                             alt="Keycaps">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                             style="background: rgba(0,0,0,0.4);">
+                            <span class="text-white fw-bold">Keycaps</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Switches -->
+                <a href="{{ route('shop.category', 'switch') }}" class="text-decoration-none">
+                    <div class="category-card position-relative" style="width: 200px; height: 150px;">
+                        <img src="{{ asset('storage/categories/switch.jpg') }}" 
+                             class="w-100 h-100 object-fit-cover rounded" 
+                             alt="Switches">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                             style="background: rgba(0,0,0,0.4);">
+                            <span class="text-white fw-bold">Switches</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
