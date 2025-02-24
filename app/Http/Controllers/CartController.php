@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -11,37 +12,76 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = session()->get('cart', []);
-        $subtotal = 0;
+        // Get cart items for current user
+        $cartItems = Cart::where('user_id', Auth::id())
+            ->with('product')
+            ->get();
         
-        // Lấy thông tin sản phẩm và tính tổng tiền
-        foreach($cartItems as &$item) {
-            $product = Product::find($item['product_id']);
-            $item['product'] = $product;
-            $subtotal += $product->price * $item['quantity'];
-        }
+        $subtotal = $cartItems->sum(function($item) {
+            return $item->product->price * $item->quantity;
+        });
 
-        $total = $subtotal; // Remove shippingFee
+        $total = $subtotal;
 
         return view('user.cart', compact('cartItems', 'subtotal', 'total'));
     }
 
     public function addToCart(Request $request, $id)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')
+                ->with('error', 'Vui lòng đăng nhập để thêm vào giỏ hàng');
+        }
+
         $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
         
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        // Check if product already exists in cart
+        $cartItem = Cart::where('user_id', Auth::id())
+            ->where('product_id', $id)
+            ->first();
+
+        if ($cartItem) {
+            // Update quantity if product exists
+            $cartItem->quantity++;
+            $cartItem->save();
         } else {
-            $cart[$id] = [
+            // Create new cart item if product doesn't exist
+            Cart::create([
+                'user_id' => Auth::id(),
                 'product_id' => $id,
                 'quantity' => 1
-            ];
+            ]);
         }
+
+        return redirect()->back()
+            ->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cartItem = Cart::where('user_id', Auth::id())
+            ->where('product_id', $id)
+            ->firstOrFail();
+
+        $quantity = max(1, min(intval($request->quantity), $cartItem->product->stock_quantity));
         
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
+        $cartItem->quantity = $quantity;
+        $cartItem->save();
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
+        return redirect()->back()->with('success', 'Số lượng đã được cập nhật');
+    }
+
+    public function remove($id)
+    {
+        Cart::where('user_id', Auth::id())
+            ->where('product_id', $id)
+            ->delete();
+
+        return redirect()->back()
+            ->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
     }
 
     public function checkout(Request $request)
@@ -51,25 +91,19 @@ class CartController extends Controller
                 ->with('error', 'Vui lòng đăng nhập để thanh toán');
         }
 
-        $cartItems = session()->get('cart', []);
-        if(empty($cartItems)) {
+        $cartItems = Cart::where('user_id', Auth::id())
+            ->with('product')
+            ->get();
+
+        if($cartItems->isEmpty()) {
             return redirect()->back()->with('error', 'Giỏ hàng trống');
         }
 
-        $total = 0;
-        $orderItems = [];
+        $total = $cartItems->sum(function($item) {
+            return $item->product->price * $item->quantity;
+        });
 
-        foreach($cartItems as $item) {
-            $product = Product::find($item['product_id']);
-            $total += $product->price * $item['quantity']; // No shipping fee added
-            $orderItems[] = [
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-                'price' => $product->price
-            ];
-        }
-
-        // Create order without shipping fee
+        // Create order
         $order = Order::create([
             'user_id' => Auth::id(),
             'order_date' => now(),
@@ -79,54 +113,19 @@ class CartController extends Controller
             'phone_number' => $request->phone_number,
         ]);
 
-        // Tạo chi tiết đơn hàng
-        foreach($orderItems as $item) {
-            $order->orderItems()->create($item);
+        // Create order items
+        foreach($cartItems as $item) {
+            $order->orderItems()->create([
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price
+            ]);
         }
 
-        // Xóa giỏ hàng
-        session()->forget('cart');
+        // Clear cart after successful checkout
+        Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('orders.show', $order->id)
             ->with('success', 'Đặt hàng thành công');
-    }
-
-    public function remove($id)
-    {
-        $cart = session()->get('cart', []);
-        
-        if(isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng');
-        }
-
-        return redirect()->back()->with('error', 'Sản phẩm không tồn tại trong giỏ hàng');
-    }
-
-    public function update(Request $request, $id)
-    {
-        $cart = session()->get('cart', []);
-        
-        if(isset($cart[$id])) {
-            $quantity = max(1, intval($request->quantity));
-            $product = Product::find($cart[$id]['product_id']);
-            
-            // Check stock availability
-            if($product && $quantity <= $product->stock_quantity) {
-                $cart[$id]['quantity'] = $quantity;
-                session()->put('cart', $cart);
-                
-                if($request->ajax()) {
-                    return response()->json(['success' => true]);
-                }
-                return redirect()->back()->with('success', 'Số lượng đã được cập nhật');
-            }
-        }
-
-        if($request->ajax()) {
-            return response()->json(['error' => 'Không thể cập nhật số lượng'], 400);
-        }
-        return redirect()->back()->with('error', 'Không thể cập nhật số lượng');
     }
 }

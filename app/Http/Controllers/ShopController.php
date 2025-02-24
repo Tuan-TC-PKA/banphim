@@ -11,9 +11,12 @@ class ShopController extends Controller
     {
         $query = Product::query();
 
-        // Filter by category
-        if ($request->category) {
-            $query->where('category', $request->category);
+        // Handle category filter
+        if ($request->has('category')) {
+            $categories = (array)$request->category;
+            if (!in_array('all', $categories)) {
+                $query->whereIn('category', $categories);
+            }
         }
 
         // Apply sorting

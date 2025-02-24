@@ -6,6 +6,7 @@
     <title>Giỏ hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <x-navbar-logged-in />
@@ -28,19 +29,22 @@
                                         <h5 class="card-title">{{ $item['product']->name }}</h5>
                                         <p class="card-text text-muted">Mã SP: #{{ $item['product']->id }}</p>
                                         <div class="input-group w-50">
-                                            <form action="{{ route('cart.update', $id) }}" method="POST" class="d-flex">
+                                            <form action="{{ route('cart.update', $item['product']->id) }}" method="POST" class="d-flex">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button class="btn btn-outline-secondary quantity-decrease" type="button" data-id="{{ $id }}">-</button>
-                                                <input type="number" name="quantity" class="form-control text-center" value="{{ $item['quantity'] }}" min="1">
-                                                <button class="btn btn-outline-secondary quantity-increase" type="button" data-id="{{ $id }}">+</button>
+                                                <button class="btn btn-outline-secondary quantity-decrease" type="button">-</button>
+                                                <input type="number" name="quantity" class="form-control text-center" 
+                                                       value="{{ $item['quantity'] }}" 
+                                                       min="1" 
+                                                       max="{{ $item['product']->stock_quantity }}">
+                                                <button class="btn btn-outline-secondary quantity-increase" type="button">+</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="text-end">
                                             <h6 class="mb-3">{{ number_format($item['product']->price * $item['quantity']) }}đ</h6>
-                                            <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('cart.remove', ['id' => $item['product']->id]) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-outline-danger btn-sm">
@@ -101,29 +105,37 @@
                 const form = this.closest('form');
                 const input = form.querySelector('input[name="quantity"]');
                 const currentValue = parseInt(input.value);
+                const maxValue = parseInt(input.getAttribute('max'));
                 
                 if(this.classList.contains('quantity-decrease')) {
-                    if(currentValue > 1) input.value = currentValue - 1;
+                    if(currentValue > 1) {
+                        input.value = currentValue - 1;
+                    }
                 } else {
-                    input.value = currentValue + 1;
+                    if(currentValue < maxValue) {
+                        input.value = currentValue + 1;
+                    }
                 }
 
                 try {
                     const formData = new FormData(form);
+                    formData.append('_method', 'PATCH');
+
                     const response = await fetch(form.action, {
                         method: 'POST',
                         body: formData,
                         headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
                         }
                     });
 
                     if (response.ok) {
-                        // Reload only the cart items section
                         window.location.reload();
                     }
                 } catch (error) {
-                    console.error('Error updating quantity:', error);
+                    console.error('Error:', error);
                 }
             });
         });
