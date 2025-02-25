@@ -121,7 +121,7 @@
                 <div class="row g-4">
                     @forelse($products as $product)
                     <div class="col-md-6 col-lg-4">
-                        <div class="product-card h-100" onclick="window.location.href='{{ route('products.info', $product->id) }}'">
+                        <div class="product-card h-100 product-link" data-href="{{ route('products.info', $product->id) }}">
                             @if($product->stock_quantity <= 0)
                                 <span class="badge bg-danger badge-stock">Out of Stock</span>
                             @endif
@@ -159,5 +159,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.querySelectorAll('.product-link').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Chỉ chuyển hướng nếu click không phải vào các elements có class specific
+            if (!e.target.closest('.navbar-nav, .dropdown-menu')) {
+                window.location.href = this.dataset.href;
+            }
+        });
+    });
+    </script>
 </body>
 </html>
