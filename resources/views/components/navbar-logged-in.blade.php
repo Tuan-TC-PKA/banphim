@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
-            <!-- Logo - Updated to use user.dashboard route -->
+            <!-- Logo -->
             <a href="{{ route('user.dashboard') }}" class="navbar-brand">DROP</a>
 
             <!-- Toggle button for mobile -->
@@ -35,6 +35,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.ordersHistory') }}">Lịch sử mua hàng</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

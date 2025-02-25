@@ -23,7 +23,7 @@
             <h1 class="hero-title">KEYCAP SET—OR CUTE ROBOT?</h1>
             <p class="hero-subtitle">How about a bit of both? Boot up Bim: a DCX set by designer Balance.</p>
             <div class="hero-buttons">
-                <button class="hero-button">SHOP NOW</button>
+            <a href="{{ route('shop.index') }}"><button class="hero-button">SHOP NOW</button></a>
                 <button class="hero-button secondary">SHOP DCX COLLECTION</button>
             </div>
         </div>
@@ -77,16 +77,16 @@
             <button class="filter-button">The Lord of The Rings™</button>
         </div>
         <div class="deskscapes-grid">
-            <div class="deskscape-item" style="grid-row-end: span 2;">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Deskscape 1">
+        <div class="deskscape-item" style="grid-row-end: span 2;">
+                <img src="{{ asset('images/anh1.jpg') }}" alt="Deskscape 1">
             </div>
             <div class="deskscape-item">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Deskscape 2">
+                <img src="{{ asset('images/anh2.jpg') }}" alt="Deskscape 2">
             </div>
             <div class="deskscape-item">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Deskscape 3">
+                <img src="{{ asset('images/anh3.jpg') }}" alt="Deskscape 3">
             </div>
-            <div class="deskscape-item" style="grid-row-end: span 1.5;">
+            <!-- <div class="deskscape-item" style="grid-row-end: span 1.5;">
                 <img src="{{ asset('build/assets/images/home.avif') }}" alt="Deskscape 4">
             </div>
             <div class="deskscape-item" style="grid-row-end: span 2;">
@@ -94,7 +94,7 @@
             </div>
             <div class="deskscape-item">
                 <img src="{{ asset('build/assets/images/home.avif') }}" alt="Deskscape 6">
-            </div>
+            </div> -->
              <!-- Add more deskscape items here, adjust grid-row-end style as needed -->
         </div>
     </section>

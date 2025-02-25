@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminSwitchController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\OrderHistoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,10 +28,6 @@ use App\Http\Controllers\ShopController;
 // Public Routes
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/shop', function () {
-    return view('shop');
 });
 
 Route::prefix('shop')->group(function () {
@@ -58,14 +56,19 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'userMiddleware'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
         // Thêm Cart Routes
-        Route::prefix('cart')->group(function () {
+        Route::prefix('user/cart')->group(function () {
             Route::get('/', [CartController::class, 'index'])->name('cart.index');
             Route::post('/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
             Route::patch('/update/{id}', [CartController::class, 'update'])->name('cart.update');
             Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
             Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
         });
-    
+
+        Route::get('user/ordersHistory', [OrderHistoryController::class, 'index'])
+         ->name('user.ordersHistory');
+        
+         //
+         //
 });
 
 // Admin Routes - Protected by 'adminMiddleware'

@@ -91,12 +91,30 @@ class CartController extends Controller
                 ->with('error', 'Vui lòng đăng nhập để thanh toán');
         }
 
+        // Validate request
+        $request->validate([
+            'selected_items' => 'required|string',
+            'address' => 'required|string',
+            'phone_number' => 'required|string'
+        ]);
+
+        // Decode selected items array
+        $selectedItems = json_decode($request->selected_items, true);
+        
+        if (empty($selectedItems)) {
+            return redirect()->back()
+                ->with('error', 'Vui lòng chọn sản phẩm để thanh toán');
+        }
+
+        // Get only selected cart items
         $cartItems = Cart::where('user_id', Auth::id())
+            ->whereIn('product_id', $selectedItems)
             ->with('product')
             ->get();
 
-        if($cartItems->isEmpty()) {
-            return redirect()->back()->with('error', 'Giỏ hàng trống');
+        if ($cartItems->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'Không tìm thấy sản phẩm đã chọn');
         }
 
         $total = $cartItems->sum(function($item) {
@@ -113,7 +131,7 @@ class CartController extends Controller
             'phone_number' => $request->phone_number,
         ]);
 
-        // Create order items
+        // Create order items only for selected products
         foreach($cartItems as $item) {
             $order->orderItems()->create([
                 'product_id' => $item->product_id,
@@ -122,10 +140,13 @@ class CartController extends Controller
             ]);
         }
 
-        // Clear cart after successful checkout
-        Cart::where('user_id', Auth::id())->delete();
+        // Remove only selected items from cart
+        Cart::where('user_id', Auth::id())
+            ->whereIn('product_id', $selectedItems)
+            ->delete();
 
-        return redirect()->route('orders.show', $order->id)
-            ->with('success', 'Đặt hàng thành công');
+        // Chuyển hướng đến trang lịch sử đơn hàng với thông báo thành công
+        return redirect()->route('user.ordersHistory')
+            ->with('success', 'Đặt hàng thành công!');
     }
 }
