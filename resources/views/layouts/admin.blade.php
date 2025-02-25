@@ -127,7 +127,7 @@
                     <a href="{{ route('admin.products.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">All Products</a>
                     <a href="{{ route('admin.keycaps.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Keycaps</a>
                     <a href="{{ route('admin.keyboards.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Keyboards</a>
-                    <a href="{{ route('admin.keyboard-switches.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Switches</a>
+                    <a href="{{ route('admin.keyboard_switches.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Switches</a>
 
                     <p class="px-4 mt-4 mb-2 text-gray-400 uppercase text-xs">Orders</p>
                     <a href="{{ route('admin.orders.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Orders</a>

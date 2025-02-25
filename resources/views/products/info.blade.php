@@ -70,8 +70,80 @@
 
                 <div class="tab-content p-4 border border-top-0">
                     <div class="tab-pane fade show active" id="details">
-                        {!! $product->detailed_description !!}
+                        <div class="row">
+                            @if($product->category === 'keyboard' && $product->keyboardDetail)
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông số kỹ thuật:</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Layout:</th>
+                                            <td>{{ $product->keyboardDetail->layout }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kết nối:</th>
+                                            <td>{{ $product->keyboardDetail->connectivity }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hãng sản xuất:</th>
+                                            <td>{{ $product->keyboardDetail->manufacturer }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            @elseif($product->category === 'keycap' && $product->keycapDetail)
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông số kỹ thuật:</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Chất liệu:</th>
+                                            <td>{{ $product->keycapDetail->material }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Profile:</th>
+                                            <td>{{ $product->keycapDetail->profile }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Layout:</th>
+                                            <td>{{ $product->keycapDetail->layout }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hãng sản xuất:</th>
+                                            <td>{{ $product->keycapDetail->manufacturer }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            @elseif($product->category === 'switch' && $product->switchDetail)
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Thông số kỹ thuật:</h5>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Loại switch:</th>
+                                            <td>{{ $product->switchDetail->type }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lực nhấn:</th>
+                                            <td>{{ $product->switchDetail->actuation_force }}g</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lực tác động:</th>
+                                            <td>{{ $product->switchDetail->bottom_out_force }}g</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hãng sản xuất:</th>
+                                            <td>{{ $product->switchDetail->manufacturer }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @endif
+
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Mô tả chi tiết:</h5>
+                                <p>{{ $product->description }}</p>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="tab-pane fade" id="shipping">
                         <h5>Chính sách vận chuyển</h5>
                         <p>Thời gian giao hàng: 2-4 ngày làm việc</p>

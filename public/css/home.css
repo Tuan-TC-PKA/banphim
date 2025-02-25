@@ -152,11 +152,11 @@ html, body {
 }
 
 .product-card.product-card-1 {
-    background-image: url('/build/assets/images/rainy-day-keyboard.jpg');
+    background-image: url('../images/card1.jpg');
 }
 
 .product-card.product-card-2 {
-    background-image: url('/build/assets/images/ta-84-amp-dac.jpg');
+    background-image: url('../images/card2.jpg');
 }
 
 .product-card::before {

@@ -7,7 +7,7 @@
         <h2 class="text-3xl font-extrabold text-gray-800 mb-6 text-center tracking-tight">Create New Switch</h2> {{-- Specific title for Switch --}}
         <p class="text-gray-600 text-center mb-8 italic">Craft a new listing for your amazing keyboard switch product.</p>
 
-        <form action="{{ route('admin.keyboard-switches.store') }}" method="POST" enctype="multipart/form-data"  {{-- Specific route for Switch store --}}
+        <form action="{{ route('admin.keyboard_switches.store') }}" method="POST" enctype="multipart/form-data"  {{-- Specific route for Switch store --}}
             class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             @csrf
 

@@ -65,5 +65,16 @@ class AdminKeyboardController extends Controller
         return redirect()->route('admin.keyboards.index')->with('success', 'Keyboard and Product created successfully.');
     }
 
+    /**
+     * Display the specified keyboard.
+     */
+    public function show(Keyboard $keyboard)
+    {
+        // Eager load the product relationship to avoid N+1 problem
+        $keyboard->load('product');
+        
+        return view('admin.keyboards.show', compact('keyboard'));
+    }
+
     // Note: show, edit, update, destroy methods are NOT defined here - reusing ProductController methods.
 };

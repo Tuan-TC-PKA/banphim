@@ -5,7 +5,7 @@
 @section('contents')
     <div>
         <h1 class="font-bold text-2xl ml-3">Switch List</h1>
-        <a href="{{ route('admin.keyboard-switches.create') }}"  {{-- Corrected route for Switch create --}}
+        <a href="{{ route('admin.keyboard_switches.create') }}"  {{-- Corrected route for Switch create --}}
             class="text-white float-right bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
             Switch</a>  {{-- Changed button text to "Add Switch" --}}
         <hr />
@@ -50,18 +50,18 @@
                             <td class="px-6 py-4 w-36">
     <div class="action-buttons">
         <!-- Detail Button -->
-        <a href="{{ route('admin.products.show', $rs->product->id) }}" class="detail-btn">
+        <a href="{{ route('admin.keyboard_switches.show', $rs->id) }}" class="detail-btn">
             <i class="fas fa-info-circle"></i> Detail
         </a>
 
         <!-- Edit Button -->
-        <a href="{{ route('admin.products.edit', $rs->product->id) }}" class="edit-btn">
+        <a href="#" class="edit-btn">
             <i class="fas fa-edit"></i> Edit
         </a>
 
-        <!-- Delete Button (inside form) -->
-        <form action="{{ route('admin.products.destroy', $rs->product->id) }}" method="POST"
-              onsubmit="return confirm('Are you sure you want to delete this product?')">
+        <!-- Delete Button -->
+        <form action="#" method="POST"
+              onsubmit="return confirm('Are you sure you want to delete this switch?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="delete-btn">

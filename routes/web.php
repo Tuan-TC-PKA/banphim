@@ -78,14 +78,15 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::resource('admin/products', ProductController::class)->names('admin.products')->except(['create', 'store']); // General product management (excluding create/store)
 
     // Admin Routes for Keycaps (Specific index, create, store - reusing show, edit, update, destroy from ProductController)
-    Route::resource('admin/keycaps', AdminKeycapController::class)->names('admin.keycaps')->except(['show', 'edit', 'update', 'destroy']); // Keycap specific management
+    Route::resource('admin/keycaps', AdminKeycapController::class)->names('admin.keycaps'); // Keycap specific management
 
     // Admin Routes for Keyboards (Specific index, create, store - reusing show, edit, update, destroy from ProductController)
-    Route::resource('admin/keyboards', AdminKeyboardController::class)->names('admin.keyboards')->except(['show', 'edit', 'update', 'destroy']); // Keyboard specific management
+    Route::resource('admin/keyboards', AdminKeyboardController::class)->names('admin.keyboards'); // Keyboard specific management
 
     // Admin Routes for Switches (Specific index, create, store - reusing show, edit, update, destroy from ProductController)
-    Route::resource('admin/keyboard-switches', AdminSwitchController::class)->names('admin.keyboard-switches')->except(['show', 'edit', 'update', 'destroy']); // Switch specific management
-
+    // Sửa thành
+    Route::resource('admin/keyboard_switches', AdminSwitchController::class)
+        ->names('admin.keyboard_switches');
 
     // Admin Resource Routes for Orders (Orders are managed by OrderController)
     Route::resource('admin/orders', OrderController::class)->names('admin.orders'); // Order management

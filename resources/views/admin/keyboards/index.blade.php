@@ -50,7 +50,7 @@
                             <td class="px-6 py-4 w-36">
     <div class="action-buttons">
         <!-- Detail Button -->
-        <a href="{{ route('admin.products.show', $rs->product->id) }}" class="detail-btn">
+        <a href="{{ route('admin.keyboards.show', $rs->id) }}" class="detail-btn">
             <i class="fas fa-info-circle"></i> Detail
         </a>
 

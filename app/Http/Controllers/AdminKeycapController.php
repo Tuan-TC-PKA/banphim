@@ -64,7 +64,13 @@ class AdminKeycapController extends Controller
 
         return redirect()->route('admin.keycaps.index')->with('success', 'Keycap and Product created successfully.');
     }
-
+    public function show(Keycap $keycap)
+    {
+        // Eager load the product relationship to avoid N+1 problem
+        $keycap->load('product');
+        
+        return view('admin.keycaps.show', compact('keycap'));
+    }
     // Note: show, edit, update, destroy methods are NOT defined here as we are reusing ProductController for these actions.
     // Routes are configured in routes/web.php to point to ProductController for these actions for keycaps.
 }

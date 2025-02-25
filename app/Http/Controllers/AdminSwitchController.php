@@ -62,8 +62,21 @@ class AdminSwitchController extends Controller
         $detail->product()->associate($product);
         $detail->save();
 
-        return redirect()->route('admin.keyboard-switches.index')->with('success', 'Switch and Product created successfully.');
+        return redirect()->route('admin.keyboard_switches.index')->with('success', 'Switch and Product created successfully.');
     }
 
     // Note: show, edit, update, destroy methods are NOT defined here - reusing ProductController methods.
+
+    /**
+     * Display the specified keyboard switch.
+     */
+    public function show(KeyboardSwitch $keyboard_switch)
+    {
+        // Eager load the product relationship to avoid N+1 problem
+        $keyboard_switch->load('product');
+        
+        return view('admin.keyboard_switches.show', [
+            'switch' => $keyboard_switch
+        ]);
+    }
 };
