@@ -55,7 +55,7 @@
         </a>
 
         <!-- Edit Button -->
-        <a href="{{ route('admin.products.edit', $rs->product->id)}}" class="edit-btn">
+        <a href="{{ route('admin.keyboards.edit', $rs->id)}}" class="edit-btn">
             <i class="fas fa-edit"></i> Edit
         </a>
 

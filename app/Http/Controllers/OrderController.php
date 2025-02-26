@@ -12,9 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // PHÂN QUYỀN BẰNG MIDDLEWARE - KHÔNG CÓ AUTHORIZE() TRONG CONTROLLER
-        $orders = Order::all();
-        return view('orders.index', compact('orders'));
+        $orders = Order::with(['user', 'orderItems.product'])->orderBy('created_at', 'desc')->get();
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -23,7 +22,7 @@ class OrderController extends Controller
     public function create()
     {
         // PHÂN QUYỀN BẰNG MIDDLEWARE - KHÔNG CÓ AUTHORIZE() TRONG CONTROLLER
-        return view('orders.create');
+        return view('admin.orders.create');
     }
 
     /**
@@ -43,7 +42,7 @@ class OrderController extends Controller
 
         Order::create($request->all());
 
-        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        return redirect()->route('admin.orders.index')->with('success', 'Order created successfully.');
     }
 
     /**
@@ -52,8 +51,8 @@ class OrderController extends Controller
     public function show(string $id)
     {
         // PHÂN QUYỀN BẰNG MIDDLEWARE - KHÔNG CÓ AUTHORIZE() TRONG CONTROLLER
-        $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
+        $order = Order::with(['user', 'orderItems.product'])->findOrFail($id);
+        return view('admin.orders.show', compact('order')); 
     }
 
     /**
@@ -63,7 +62,8 @@ class OrderController extends Controller
     {
         // PHÂN QUYỀN BẰNG MIDDLEWARE - KHÔNG CÓ AUTHORIZE() TRONG CONTROLLER
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
+        // Sửa từ 'orders.edit' thành 'admin.orders.edit' 
+        return view('admin.orders.edit', compact('order'));
     }
 
     /**
@@ -71,20 +71,20 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // PHÂN QUYỀN BẰNG MIDDLEWARE - KHÔNG CÓ AUTHORIZE() TRONG CONTROLLER
         $order = Order::findOrFail($id);
-
+        
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'total_amount' => 'required|numeric|min:0',
-            'status' => 'nullable|string|max:255',
-            'address' => 'nullable|string',
-            'phone_number' => 'nullable|string|max:20',
+            'status' => 'required|in:pending,processing,completed,cancelled'
         ]);
 
-        $order->update($request->all());
+        $order->status = $request->status;
+        $order->save();
 
-        return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        // Thêm success vào session flash
+        session()->flash('success', 'Cập nhật trạng thái đơn hàng thành công');
+
+        // Chỉ redirect, không kèm with()
+        return redirect()->route('admin.orders.index');
     }
 
     /**
@@ -96,6 +96,6 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->delete();
 
-        return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
+        return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully.');
     }
 }

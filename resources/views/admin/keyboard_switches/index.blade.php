@@ -55,12 +55,12 @@
         </a>
 
         <!-- Edit Button -->
-        <a href="#" class="edit-btn">
+        <a href="{{ route('admin.keyboard_switches.edit', $rs->id) }}" class="edit-btn">
             <i class="fas fa-edit"></i> Edit
         </a>
 
         <!-- Delete Button -->
-        <form action="#" method="POST"
+        <form action="{{ route('admin.products.destroy', $rs->product->id) }}" method="POST"
               onsubmit="return confirm('Are you sure you want to delete this switch?')">
             @csrf
             @method('DELETE')
