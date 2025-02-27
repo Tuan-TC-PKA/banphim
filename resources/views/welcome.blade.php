@@ -29,14 +29,14 @@
         <div class="product-card product-card-1">
             <div class="card-content">
                 <h3 class="card-title">YOUR RAINY-DAY KEYBOARD</h3>
-                <button class="shop-button">SHOP WOBKEY RAINY75 KEYBOARD</button>
+                <a href="{{ route('shop.index') }}"><button class="shop-button">SHOP WOBKEY RAINY75 KEYBOARD</button></a>
             </div>
         </div>
 
         <div class="product-card product-card-2">
-            <div class="card-content">
-                <h3 class="card-title">TC + XDUOO TA-84 OTL AMP/DAC</h3>
-                <button class="shop-button">SHOP TA-84 OTL AMP/DAC</button>
+        <div class="card-content">
+                <h3 class="card-title">THE LỎD OF THE RINGS</h3>
+                <a href="{{ route('shop.index') }}"><button class="shop-button">BUY NOW</button></a>
             </div>
         </div>
     </section>
@@ -78,7 +78,7 @@
     </section>
 
     <section class="deskscapes-section">
-        <h2 class="deskscapes-title">SHOP OUR DESKSCAPES</h2>
+        <h2 class="deskscapes-title" style="padding: 20px;">SHOP OUR DESKSCAPES</h2>
         <div class="deskscapes-grid">
             <div class="deskscape-item" style="grid-row-end: span 2;">
                 <img src="{{ asset('images/anh1.jpg') }}" alt="Deskscape 1">

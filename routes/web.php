@@ -32,7 +32,6 @@ Route::get('/', function () {
 //
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 //
-Route::get('/search', [SearchController::class, 'search']);
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/category/{category}', [ShopController::class, 'category'])->name('shop.category');
