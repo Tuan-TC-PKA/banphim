@@ -1,66 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Giới thiệu
+**Ứng dụng quản lý bán bàn phím**
+👨‍💻 **Tiêu Công Tuấn**
+##
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Mô tả
 
-## About Laravel
+Ứng dụng quản lý bán bàn phím là một giải pháp toàn diện cho việc quản lý kinh doanh các loại bàn phím. Hệ thống cung cấp các công cụ để theo dõi quản lý đơn hàng và thống kê doanh thu một cách hiệu quả.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Được xây dựng trên nền tảng Laravel, ứng dụng mang đến giao diện thân thiện với người dùng cùng khả năng tùy biến linh hoạt theo nhu cầu kinh doanh cụ thể. Phần mềm hỗ trợ nhiều tính năng độc đáo.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Giải pháp này phù hợp cho các cửa hàng bàn phím chuyên dụng, doanh nghiệp phân phối thiết bị điện tử, hoặc bất kỳ đơn vị nào cần một hệ thống quản lý bán hàng chuyên nghiệp.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Yêu cầu hệ thống
 
-## Learning Laravel
+- PHP >= 8.0
+- Composer
+- Node.js & NPM
+- Cơ sở dữ liệu
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Cài đặt
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+# Sao chép mã nguồn
+git clone <https://github.com/Tuan-TC-PKA/banphim.git>
+cd banphim
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Cài đặt các gói phụ thuộc
+composer install
+npm install
 
-## Laravel Sponsors
+# Thiết lập môi trường
+cp .env.example .env
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Chạy migrations
+php artisan migrate
+```
 
-### Premium Partners
+## Cấu hình
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Chỉnh sửa tệp `.env` để cấu hình:
+- Kết nối cơ sở dữ liệu
+- Cài đặt email
+- URL ứng dụng
+- Các cài đặt đặc thù khác
 
-## Contributing
+## Sử dụng
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+# Khởi động máy chủ phát triển
+php artisan serve
+```
 
-## Code of Conduct
+## Tính năng
+### Admin
+- **Quản lý đơn hàng**: Theo dõi trạng thái đơn hàng, xử lý đặt hàng mới, cập nhật thông tin vận chuyển, và quản lý hoàn trả sản phẩm. Hệ thống hiển thị lịch sử đơn đặt hàng và cho phép tìm kiếm nhanh.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Thống kê**: Tạo báo cáo chi tiết về doanh thu theo ngày, tuần, tháng và năm. Phân tích xu hướng bán hàng, sản phẩm bán chạy và hiệu suất kinh doanh. Biểu đồ trực quan giúp theo dõi sự tăng trưởng và đưa ra quyết định kinh doanh.
 
-## Security Vulnerabilities
+- **Quản lý sản phẩm**: Thêm, sửa và xóa thông tin sản phẩm. Quản lý danh mục, giá cả, hình ảnh và tồn kho. Theo dõi số lượng tồn kho và thiết lập cảnh báo khi hàng sắp hết.
+### User
+- **Quản lý đơn hàng**: Theo dõi trạng thái các đơn hàng đã đặt, xem lịch sử mua sắm và chi tiết từng đơn. Nhận thông báo khi đơn hàng được cập nhật và quản lý việc trả lại hoặc hoàn tiền nếu cần.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Giỏ hàng**: Thêm sản phẩm vào giỏ hàng, điều chỉnh số lượng, áp dụng mã giảm giá và tính toán tổng chi phí trước khi thanh toán. Giỏ hàng được lưu tự động cho các lần truy cập sau.
 
-## License
+- **Xem sản phẩm**: Duyệt danh sách sản phẩm với hình ảnh chi tiết, mô tả đầy đủ, thông số kỹ thuật và đánh giá từ khách hàng khác. Xem các sản phẩm liên quan và gợi ý phụ kiện đi kèm.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Mua sản phẩm**: Quy trình thanh toán đơn giản với nhiều phương thức thanh toán. Chọn địa chỉ giao hàng và phương thức vận chuyển phù hợp. Nhận xác nhận đơn hàng qua email.
+
+- **Lọc sản phẩm và tìm kiếm**: Tìm kiếm nhanh chóng bằng từ khóa hoặc lọc sản phẩm theo nhiều tiêu chí như giá cả, thương hiệu, loại switch, kết nối và bố cục. Sắp xếp kết quả theo mức độ phổ biến, giá cả hoặc đánh giá.
+
+## Đóng góp
+
+Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
+
+## Giấy phép
+
+Dự án này được cấp phép theo [Giấy phép MIT](LICENSE).
