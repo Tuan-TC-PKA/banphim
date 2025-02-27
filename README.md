@@ -69,9 +69,38 @@ php artisan serve
 - **Lọc sản phẩm và tìm kiếm**: Tìm kiếm nhanh chóng bằng từ khóa hoặc lọc sản phẩm theo nhiều tiêu chí như giá cả, thương hiệu, loại switch, kết nối và bố cục. Sắp xếp kết quả theo mức độ phổ biến, giá cả hoặc đánh giá.
 
 ## Hình ảnh website
+### Trang chủ
+![Image](https://github.com/user-attachments/assets/af2252c7-0c9b-4fc5-9ae5-900fb5d689ff)
 
+### Trang shop
+![Image](https://github.com/user-attachments/assets/3d512006-bdc9-4a5f-916e-ca3d70e02f59)
 Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
 
-## Giấy phép
+### Chi tiết sản phẩm
+![Image](https://github.com/user-attachments/assets/c7feb6c0-50a2-470f-9570-14ba24b5a7f5)
+
+### Giỏ hàng
+![Image](https://github.com/user-attachments/assets/fb2a4295-505a-49ba-98c0-bc5a07748f1c)
+
+### Lịch sử mua hàng
+![Image](https://github.com/user-attachments/assets/fb2a4295-505a-49ba-98c0-bc5a07748f1c)
+
+### Admin dashboard
+![Image](https://github.com/user-attachments/assets/10959f40-1969-4b39-9f45-86f0e2e34de7)
+
+### All products
+![Image](https://github.com/user-attachments/assets/bc6a60bd-1219-4e27-9369-cde7a0e15c77)
+
+### Keycaps
+![Image](https://github.com/user-attachments/assets/a4c82780-a000-4a51-931a-bbbec08f2265)
+
+### Keyboards
+![Image](https://github.com/user-attachments/assets/424cf833-9762-4d1c-bcb5-879646c0400b)
+
+### Switch
+![Image](https://github.com/user-attachments/assets/71a55e1d-f2a6-4064-81f7-8eaca4916aba)
+
+### Order
+![Image](https://github.com/user-attachments/assets/76b65fc9-38b6-4b38-8096-e7d146357915)
 
 Dự án này được cấp phép theo [Giấy phép MIT](LICENSE).

@@ -5,7 +5,6 @@
 @section('contents')
     <div class="bg-white p-4 rounded-md">
         <h1 class="text-xl font-semibold mb-4">Welcome to Admin Dashboard</h1>
-        <p class="mb-6">This is your admin dashboard. You can manage your products, orders, and more from here.</p>
         
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
