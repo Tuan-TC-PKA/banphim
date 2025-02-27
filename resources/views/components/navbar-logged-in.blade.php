@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
-        <a href="{{ route('user.dashboard') }}" class="navbar-brand">DROP</a>
+        <a href="{{ route('user.dashboard') }}" class="navbar-brand">TC</a>
 
         <!-- Toggle button for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">

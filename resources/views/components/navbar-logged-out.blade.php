@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
-        <a href="/" class="navbar-brand">DROP</a>
+        <a href="/" class="navbar-brand">TC</a>
 
         <!-- Login/Register buttons -->
         <div class="d-flex align-items-center order-lg-2 ms-auto">
