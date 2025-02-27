@@ -1,8 +1,6 @@
 # Giới thiệu
 **Ứng dụng quản lý bán bàn phím**
 👨‍💻 **Tiêu Công Tuấn**
-##
-
 ## Mô tả
 
 Ứng dụng quản lý bán bàn phím là một giải pháp toàn diện cho việc quản lý kinh doanh các loại bàn phím. Hệ thống cung cấp các công cụ để theo dõi quản lý đơn hàng và thống kê doanh thu một cách hiệu quả.
@@ -71,6 +69,8 @@ php artisan serve
 - **Lọc sản phẩm và tìm kiếm**: Tìm kiếm nhanh chóng bằng từ khóa hoặc lọc sản phẩm theo nhiều tiêu chí như giá cả, thương hiệu, loại switch, kết nối và bố cục. Sắp xếp kết quả theo mức độ phổ biến, giá cả hoặc đánh giá.
 
 ## Đóng góp
+
+![Image](https://github.com/user-attachments/assets/20ddeb57-a114-4554-aa43-048958f2a424)
 
 Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
 
