@@ -35,6 +35,9 @@ class CartController extends Controller
 
         $product = Product::findOrFail($id);
         
+        // Get quantity from form (default to 1 if not provided)
+        $quantity = max(1, min(intval($request->quantity ?? 1), $product->stock_quantity));
+        
         // Check if product already exists in cart
         $cartItem = Cart::where('user_id', Auth::id())
             ->where('product_id', $id)
@@ -42,14 +45,14 @@ class CartController extends Controller
 
         if ($cartItem) {
             // Update quantity if product exists
-            $cartItem->quantity++;
+            $cartItem->quantity += $quantity; // Add selected quantity
             $cartItem->save();
         } else {
-            // Create new cart item if product doesn't exist
+            // Create new cart item with selected quantity
             Cart::create([
                 'user_id' => Auth::id(),
                 'product_id' => $id,
-                'quantity' => 1
+                'quantity' => $quantity // Use selected quantity
             ]);
         }
 
