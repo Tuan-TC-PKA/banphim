@@ -105,4 +105,14 @@ Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
 ### Order
 ![Image](https://github.com/user-attachments/assets/76b65fc9-38b6-4b38-8096-e7d146357915)
 
+
+## Deployment
+https:\\xiao.software
+
+## Repo
+https://github.com/Tuan-TC-PKA/banphim
+
+## Video demo
+https://drive.google.com/file/d/1rshb4BMEU-3toyNFDvV1eAIZXO_2hu4D/view?usp=sharing
+
 Dự án này được cấp phép theo [Giấy phép MIT](LICENSE).
