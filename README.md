@@ -107,7 +107,7 @@ Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
 
 
 ## Deployment
-https:\\xiao.software
+https://xiao.software
 
 ## Repo
 https://github.com/Tuan-TC-PKA/banphim
