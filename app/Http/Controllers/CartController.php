@@ -133,11 +133,17 @@ class CartController extends Controller
 
         // Create order items only for selected products
         foreach($cartItems as $item) {
+            // Create order item
             $order->orderItems()->create([
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity,
                 'price' => $item->product->price
             ]);
+            
+            // Reduce product stock
+            $product = Product::find($item->product_id);
+            $product->stock_quantity -= $item->quantity;
+            $product->save();
         }
 
         // Remove only selected items from cart
