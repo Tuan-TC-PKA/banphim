@@ -1,6 +1,8 @@
 # Giới thiệu
 **Ứng dụng quản lý bán bàn phím**
+
 👨‍💻 **Tiêu Công Tuấn**
+
 ## Mô tả
 
 Ứng dụng quản lý bán bàn phím là một giải pháp toàn diện cho việc quản lý kinh doanh các loại bàn phím. Hệ thống cung cấp các công cụ để theo dõi quản lý đơn hàng và thống kê doanh thu một cách hiệu quả.
@@ -58,9 +60,9 @@ php artisan serve
 
 - **Quản lý sản phẩm**: Thêm, sửa và xóa thông tin sản phẩm. Quản lý danh mục, giá cả, hình ảnh và tồn kho. Theo dõi số lượng tồn kho và thiết lập cảnh báo khi hàng sắp hết.
 ### User
-- **Quản lý đơn hàng**: Theo dõi trạng thái các đơn hàng đã đặt, xem lịch sử mua sắm và chi tiết từng đơn. Nhận thông báo khi đơn hàng được cập nhật và quản lý việc trả lại hoặc hoàn tiền nếu cần.
+- **Quản lý đơn hàng**: Theo dõi trạng thái các đơn hàng đã đặt, xem lịch sử mua sắm và chi tiết từng đơn.
 
-- **Giỏ hàng**: Thêm sản phẩm vào giỏ hàng, điều chỉnh số lượng, áp dụng mã giảm giá và tính toán tổng chi phí trước khi thanh toán. Giỏ hàng được lưu tự động cho các lần truy cập sau.
+- **Giỏ hàng**: Thêm sản phẩm vào giỏ hàng, điều chỉnh số lượng, áp dụng và tính toán tổng chi phí trước khi thanh toán. Giỏ hàng được lưu tự động cho các lần truy cập sau.
 
 - **Xem sản phẩm**: Duyệt danh sách sản phẩm với hình ảnh chi tiết, mô tả đầy đủ, thông số kỹ thuật và đánh giá từ khách hàng khác. Xem các sản phẩm liên quan và gợi ý phụ kiện đi kèm.
 
