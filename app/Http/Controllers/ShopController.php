@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ShopController extends Controller
 {
     public function index(Request $request)
     {
         $query = Product::query();
+
+        // Search by product name
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
 
         // Handle category filter
         if ($request->has('category')) {
@@ -34,8 +40,14 @@ class ShopController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query->paginate(9);
-        $products->appends($request->query());
+        // Your existing filtering logic...
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        // ...other filters...
+
+        $products = $query->paginate(12)->appends(request()->query());
 
         return view('shop', compact('products'));
     }

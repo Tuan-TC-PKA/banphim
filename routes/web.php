@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\OrderHistoryController;
-
+use App\Http\Controllers\Api\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,10 @@ use App\Http\Controllers\OrderHistoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+//
+Route::get('/search', [SearchController::class, 'search']);
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/category/{category}', [ShopController::class, 'category'])->name('shop.category');
@@ -68,6 +71,7 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
          ->name('user.ordersHistory');
         
          //
+         Route::get('/user/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('user.dashboard');
          //
 });
 

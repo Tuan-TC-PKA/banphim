@@ -17,7 +17,7 @@
 
         <!-- Login/Register buttons -->
         <div class="d-flex align-items-center order-lg-2 ms-auto">
-            <span class="search-icon fas fa-search mx-2"></span>
+            
             <a href="{{ route('login') }}" class="btn nav-login-btn mx-2">LOG IN</a>
             <a href="{{ route('register') }}" class="btn nav-signup-btn mx-2">SIGN UP</a>
         </div>
@@ -25,10 +25,7 @@
         <!-- Menu items -->
         <div class="collapse navbar-collapse order-lg-1" id="navbarContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">WHAT'S NEW</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">SHOP</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">SALE</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">COMMUNITY</a></li>
             </ul>
         </div>
     </div>

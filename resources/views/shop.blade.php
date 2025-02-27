@@ -51,6 +51,18 @@
                 <div class="filter-card">
                     <h5 class="section-title">Filters</h5>
                     <form action="{{ route('shop.index') }}" method="GET">
+                        <!-- Add search field at the top -->
+                        <div class="mb-4">
+                            <label class="form-label">Search Products</label>
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" 
+                                       value="{{ request('search') }}" placeholder="Enter product name...">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="mb-4">
                             <label class="form-label">Price Range</label>
                             <div class="input-group mb-2">

@@ -125,4 +125,13 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
+
+    public function search(Request $request)
+{
+    $query = $request->get('q');
+    
+    return Product::where('name', 'like', "%{$query}%")
+        ->take(5)
+        ->get(['id', 'name', 'price', 'image']);
+}
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop Clone - Welcome</title>
+    <title>TC Clone - Welcome</title>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,7 +20,7 @@
             <p class="hero-subtitle">How about a bit of both? Boot up Bim: a DCX set by designer Balance.</p>
             <div class="hero-buttons">
                 <a href="{{ route('shop.index') }}"><button class="hero-button">SHOP NOW</button></a>
-                <button class="hero-button secondary">SHOP DCX COLLECTION</button>
+                
             </div>
         </div>
     </section>
@@ -35,9 +35,8 @@
 
         <div class="product-card product-card-2">
             <div class="card-content">
-                <h3 class="card-title">DROP + XDUOO TA-84 OTL AMP/DAC</h3>
+                <h3 class="card-title">TC + XDUOO TA-84 OTL AMP/DAC</h3>
                 <button class="shop-button">SHOP TA-84 OTL AMP/DAC</button>
-                <button class="shop-button" style="margin-top: 10px;">SHOP HD 6XX HEADPHONES</button>
             </div>
         </div>
     </section>
@@ -46,32 +45,40 @@
         <h2 class="category-title">SHOP BY CATEGORY</h2>
         <div class="category-cards-container">
             <div class="category-card">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Keyboards Category">
-                <div class="category-name">Keyboards</div>
+                <a href="{{ route('shop.category', 'keyboard') }}" class="text-decoration-none">
+                    @if($randomKeyboard && $randomKeyboard->image)
+                        <img src="{{ asset('storage/'.$randomKeyboard->image) }}" alt="Keyboards Category">
+                    @else
+                        <img src="{{ asset('build/assets/images/home.avif') }}" alt="Keyboards Category">
+                    @endif
+                    <div class="category-name">Keyboards</div>
+                </a>
             </div>
             <div class="category-card">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Headphones Category">
-                <div class="category-name">Headphones</div>
+                <a href="{{ route('shop.category', 'keycap') }}" class="text-decoration-none">
+                    @if($randomKeycap && $randomKeycap->image)
+                        <img src="{{ asset('storage/'.$randomKeycap->image) }}" alt="Keycaps Category">
+                    @else
+                        <img src="{{ asset('build/assets/images/home.avif') }}" alt="Keycaps Category">
+                    @endif
+                    <div class="category-name">Keycaps</div>
+                </a>
             </div>
             <div class="category-card">
-                <img src="{{ asset('build/assets/images/home.avif') }}" alt="Desk Mats Category">
-                <div class="category-name">Desk Mats</div>
+                <a href="{{ route('shop.category', 'switch') }}" class="text-decoration-none">
+                    @if($randomSwitch && $randomSwitch->image)
+                        <img src="{{ asset('storage/'.$randomSwitch->image) }}" alt="Switches Category">
+                    @else
+                        <img src="{{ asset('build/assets/images/home.avif') }}" alt="Switches Category">
+                    @endif
+                    <div class="category-name">Switches</div>
+                </a>
             </div>
         </div>
     </section>
 
     <section class="deskscapes-section">
         <h2 class="deskscapes-title">SHOP OUR DESKSCAPES</h2>
-        <div class="deskscapes-filter-bar">
-            <button class="filter-button">All</button>
-            <button class="filter-button">New</button>
-            <button class="filter-button">Bright</button>
-            <button class="filter-button">Cozy</button>
-            <button class="filter-button">Monochrome</button>
-            <button class="filter-button">Dark</button>
-            <button class="filter-button">RGB</button>
-            <button class="filter-button">The Lord of The Rings™</button>
-        </div>
         <div class="deskscapes-grid">
             <div class="deskscape-item" style="grid-row-end: span 2;">
                 <img src="{{ asset('images/anh1.jpg') }}" alt="Deskscape 1">
@@ -100,7 +107,7 @@
             <div class="footer-column">
                 <div class="footer-heading">COMPANY</div>
                 <ul class="footer-links">
-                    <li><a href="#">About Drop Studio</a></li>
+                    <li><a href="#">About TC Studio</a></li>
                     <li><a href="#">Student Discount</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Use</a></li>
@@ -109,19 +116,19 @@
             </div>
 
             <div class="footer-column">
-                <div class="footer-heading">DROP REWARDS</div>
+                <div class="footer-heading">TC REWARDS</div>
                 <ul class="footer-links">
                     <li>Get $5 for every 500 points</li>
                     <li>you earn! <a href="#">Learn more</a></li>
                 </ul>
-                <div class="footer-heading">DROP REFURBISHED</div>
+                <div class="footer-heading">TC REFURBISHED</div>
                 <ul class="footer-links">
                     <li>Like-new products you can trust</li>
                 </ul>
             </div>
 
             <div class="footer-column">
-                <div class="footer-heading">DROP KEYBOARD CLUB SUPPORT</div>
+                <div class="footer-heading">TC KEYBOARD CLUB SUPPORT</div>
                 <ul class="footer-links">
                     <li>Become a member and expand</li>
                     <li>your keycap collection</li>
@@ -129,7 +136,7 @@
             </div>
 
             <div class="footer-column">
-                <div class="footer-heading">COLLABORATE WITH US FOLLOW DROP</div>
+                <div class="footer-heading">COLLABORATE WITH US FOLLOW TC</div>
                 <ul class="footer-links">
                     <li><a href="#">Become an Affiliate</a></li>
                     <li><a href="#">For Brands & Designers</a></li>
