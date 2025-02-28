@@ -126,7 +126,8 @@
                                     <input type="text" class="form-control" id="phone" name="phone_number" required>
                                 </div>
                                 <input type="hidden" name="selected_items" id="selectedItems">
-                                <button type="submit" class="btn btn-primary w-100" id="checkoutButton" disabled>
+                                <button type="submit" class="btn btn-primary w-100" id="checkoutButton" 
+                                    @if(!session('buy_now_item')) disabled @endif>
                                     Thanh toán
                                 </button>
                             </form>
@@ -230,6 +231,9 @@
                     updateTotal();
                 });
             });
+            
+            // Call updateTotal on page load to initialize with correct values
+            updateTotal();
         });
 
         // Thêm event listener cho form checkout
@@ -240,6 +244,7 @@
                 e.preventDefault();
                 alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán');
             }
+            
         });
     </script>
 </body>

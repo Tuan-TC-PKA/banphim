@@ -36,26 +36,34 @@ class CartController extends Controller
         $product = Product::findOrFail($id);
         
         // Get quantity from form (default to 1 if not provided)
-        $quantity = max(1, min(intval($request->quantity ?? 1), $product->stock_quantity));
-        
-        // Check if product already exists in cart
-        $cartItem = Cart::where('user_id', Auth::id())
-            ->where('product_id', $id)
+        $quantity = max(1, min(intval($request->quantity), $product->stock_quantity));
+
+        // Check if product already in cart
+        $existingCartItem = Cart::where('user_id', Auth::id())
+            ->where('product_id', $product->id)
             ->first();
 
-        if ($cartItem) {
-            // Update quantity if product exists
-            $cartItem->quantity += $quantity; // Add selected quantity
-            $cartItem->save();
+        if ($existingCartItem) {
+            // Update quantity if already in cart
+            $existingCartItem->quantity += $quantity;
+            $existingCartItem->save();
         } else {
-            // Create new cart item with selected quantity
+            // Add new cart item
             Cart::create([
                 'user_id' => Auth::id(),
-                'product_id' => $id,
-                'quantity' => $quantity // Use selected quantity
+                'product_id' => $product->id,
+                'quantity' => $quantity
             ]);
         }
 
+        // Check if this is a "buy now" action
+        if ($request->buy_now == '1') {
+            // Redirect to cart with session flag to auto-select this item
+            session()->flash('buy_now_item', $product->id);
+            return redirect()->route('cart.index');
+        }
+
+        // Normal "add to cart" flow
         return redirect()->back()
             ->with('success', 'Sản phẩm đã được thêm vào giỏ hàng');
     }

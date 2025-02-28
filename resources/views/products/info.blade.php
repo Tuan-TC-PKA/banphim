@@ -44,9 +44,18 @@
                                 <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity()">+</button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-                        </button>
+                        
+                        <!-- Hidden field to indicate buy now action -->
+                        <input type="hidden" name="buy_now" id="buyNowField" value="0">
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
+                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                            </button>
+                            <button type="submit" class="btn btn-success btn-lg flex-grow-1" onclick="setBuyNow()">
+                                <i class="fas fa-bolt me-2"></i>Mua ngay
+                            </button>
+                        </div>
                     </form>
                 @else
                     <div class="alert alert-warning">
@@ -171,6 +180,10 @@
             if (currentValue > 1) {
                 input.value = currentValue - 1;
             }
+        }
+        
+        function setBuyNow() {
+            document.getElementById('buyNowField').value = '1';
         }
     </script>
 </body>
