@@ -44,7 +44,14 @@ class ShopController extends Controller
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
         }
-
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        
+        // IN STOCK FILTER - This is the important part!
+        if ($request->has('in_stock')) {
+            $query->where('stock_quantity', '>', 0);
+        }
         // ...other filters...
 
         $products = $query->paginate(12)->appends(request()->query());

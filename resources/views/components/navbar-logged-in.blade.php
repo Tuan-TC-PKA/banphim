@@ -50,55 +50,57 @@ const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
 let searchTimeout;
 
-searchInput.addEventListener('input', function() {
-  clearTimeout(searchTimeout);
-  const query = this.value;
+if (searchInput) {  // Add this check
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const query = this.value;
 
-  searchTimeout = setTimeout(() => {
-    if (query.length >= 2) {
-      fetch(`/api/search?q=${encodeURIComponent(query)}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(products => {
-          if (products.length === 0) {
+    searchTimeout = setTimeout(() => {
+      if (query.length >= 2) {
+        fetch(`/api/search?q=${encodeURIComponent(query)}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(products => {
+            if (products.length === 0) {
+              searchResults.innerHTML = `
+                <div class="list-group-item text-center text-muted">
+                  <i class="fas fa-search mb-2"></i>
+                  <p class="mb-0">Không tìm thấy sản phẩm nào</p>
+                </div>
+              `;
+            } else {
+              searchResults.innerHTML = products.map(product => `
+                <a href="/products/${product.id}" class="list-group-item list-group-item-action">
+                  <div class="d-flex align-items-center">
+                    <img src="/storage/${product.image}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                    <div>
+                      <h6 class="mb-1">${product.name}</h6>
+                      <small class="text-muted">${new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                      }).format(product.price)}</small>
+                    </div>
+                  </div>
+                </a>
+              `).join('');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
             searchResults.innerHTML = `
               <div class="list-group-item text-center text-muted">
-                <i class="fas fa-search mb-2"></i>
-                <p class="mb-0">Không tìm thấy sản phẩm nào</p>
+                <p class="mb-0">Đã xảy ra lỗi khi tìm kiếm</p>
               </div>
             `;
-          } else {
-            searchResults.innerHTML = products.map(product => `
-              <a href="/products/${product.id}" class="list-group-item list-group-item-action">
-                <div class="d-flex align-items-center">
-                  <img src="/storage/${product.image}" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
-                  <div>
-                    <h6 class="mb-1">${product.name}</h6>
-                    <small class="text-muted">${new Intl.NumberFormat('vi-VN', {
-                      style: 'currency',
-                      currency: 'VND'
-                    }).format(product.price)}</small>
-                  </div>
-                </div>
-              </a>
-            `).join('');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          searchResults.innerHTML = `
-            <div class="list-group-item text-center text-muted">
-              <p class="mb-0">Đã xảy ra lỗi khi tìm kiếm</p>
-            </div>
-          `;
-        });
-    } else {
-      searchResults.innerHTML = '';
-    }
-  }, 300);
-});
+          });
+      } else {
+        searchResults.innerHTML = '';
+      }
+    }, 300);
+  });
+}
 </script>
