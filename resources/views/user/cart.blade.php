@@ -154,7 +154,12 @@
                         input.value = currentValue - 1;
                     }
                 } else {
-                    if(currentValue < maxValue) {
+                    // Nếu người dùng đang cố tăng số lượng vượt quá kho hàng
+                    if(currentValue >= maxValue) {
+                        // Hiển thị thông báo
+                        showStockLimitAlert(maxValue);
+                        return; // Ngừng xử lý để không gửi request
+                    } else {
                         input.value = currentValue + 1;
                     }
                 }
@@ -182,6 +187,56 @@
             });
         });
 
+        // Tạo hàm hiển thị thông báo khi vượt quá số lượng tồn kho
+        function showStockLimitAlert(maxStock) {
+            console.log('Showing stock limit alert, max stock:', maxStock);
+    
+            try {
+                // Tạo modal Bootstrap
+                const modalHtml = `
+                    <div class="modal fade" id="stockLimitModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title text-danger"><i class="fas fa-exclamation-circle me-2"></i>Sản phẩm cháy hàng</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="fw-bold">Rất tiếc, bạn chỉ có thể mua tối đa ${maxStock} sản phẩm này.</p>
+                                    <p>Số lượng trong kho của chúng tôi hiện có hạn.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Remove any existing modals with the same ID
+                const existingModal = document.getElementById('stockLimitModal');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+
+                // Thêm modal vào trang
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+                // Hiển thị modal
+                const modalElement = document.getElementById('stockLimitModal');
+                const modal = new bootstrap.Modal(modalElement);
+                modal.show();
+
+                // Xóa modal khỏi DOM sau khi đóng
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    this.remove();
+                });
+            } catch (error) {
+                console.error('Error showing stock limit alert:', error);
+                alert(`Rất tiếc, bạn chỉ có thể mua tối đa ${maxStock} sản phẩm này.`);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const selectAll = document.getElementById('selectAll');
             const productCheckboxes = document.querySelectorAll('.product-checkbox');
@@ -196,7 +251,9 @@
                 productCheckboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseFloat(checkbox.dataset.price);
-                        const quantity = parseInt(checkbox.dataset.quantity);
+                        // Get the current quantity from the input field
+                        const quantityInput = checkbox.closest('.card-body').querySelector('input[name="quantity"]');
+                        const quantity = parseInt(quantityInput.value);
                         total += price * quantity;
                         selectedItems.push(checkbox.value);
                     }
@@ -234,17 +291,78 @@
             
             // Call updateTotal on page load to initialize with correct values
             updateTotal();
+
+            // Add this to your DOMContentLoaded event handler
+            document.querySelectorAll('input[name="quantity"]').forEach(input => {
+                input.addEventListener('change', updateTotal);
+            });
+
+            // Add manual input handling
+            document.querySelectorAll('input[name="quantity"]').forEach(input => {
+                input.addEventListener('input', function() {
+                    const maxValue = parseInt(this.getAttribute('max'));
+                    const currentValue = parseInt(this.value);
+                    
+                    // Check if value exceeds stock limit
+                    if (currentValue > maxValue) {
+                        // Reset to max value
+                        this.value = maxValue;
+                        // Show notification
+                        showStockLimitAlert(maxValue);
+                    }
+                });
+            });
+
+            // Real-time phone number validation
+            const phoneInput = document.getElementById('phone');
+            const phoneInputParent = phoneInput.parentElement;
+            let feedbackElement = document.createElement('div');
+            feedbackElement.className = 'invalid-feedback';
+            feedbackElement.textContent = 'Số điện thoại không hợp lệ';
+            phoneInputParent.appendChild(feedbackElement);
+
+            phoneInput.addEventListener('input', function() {
+                const phoneValue = this.value.trim();
+                const phoneRegex = /^0\d{9}$/;
+                
+                if (phoneValue === '') {
+                    // Empty field - reset validation state
+                    this.classList.remove('is-invalid');
+                    this.classList.remove('is-valid');
+                } else if (!phoneRegex.test(phoneValue)) {
+                    // Invalid phone number
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                } else {
+                    // Valid phone number
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
+            });
         });
 
         // Thêm event listener cho form checkout
         document.getElementById('checkoutForm').addEventListener('submit', function(e) {
             const selectedItems = document.getElementById('selectedItems').value;
+            const phoneInput = document.getElementById('phone');
+            const phoneValue = phoneInput.value.trim();
+            const phoneRegex = /^0\d{9}$/;
             
+            // Kiểm tra sản phẩm đã chọn
             if (!selectedItems || selectedItems === '[]') {
                 e.preventDefault();
                 alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán');
+                return;
             }
             
+            // Kiểm tra số điện thoại
+            if (!phoneRegex.test(phoneValue)) {
+                e.preventDefault();
+                // Add invalid class to show the error message
+                phoneInput.classList.add('is-invalid');
+                // Focus on the phone input
+                phoneInput.focus();
+            }
         });
     </script>
 </body>
