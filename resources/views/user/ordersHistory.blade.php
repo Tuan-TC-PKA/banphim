@@ -36,13 +36,33 @@
                 </div>
             </div>
             <div class="card-body">
+                <!-- Thông tin giao hàng -->
+                <div class="mb-3 p-3 bg-light rounded">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fas fa-map-marker-alt me-2"></i>Địa chỉ giao hàng:</strong></p>
+                            <p class="mb-2">{{ $order->address }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fas fa-phone me-2"></i>Số điện thoại:</strong></p>
+                            <p class="mb-2">{{ $order->phone_number }}</p>
+                        </div>
+                    </div>
+                </div>
+                
                 @foreach($order->orderItems as $item)
                 <div class="row mb-3">
                     <div class="col-md-2">
-                        <img src="{{ asset('storage/'.$item->product->image) }}" class="img-fluid rounded" alt="{{ $item->product->name }}">
+                        <a href="{{ route('products.info', $item->product->id) }}" title="Xem thông tin sản phẩm">
+                            <img src="{{ asset('storage/'.$item->product->image) }}" class="img-fluid rounded" alt="{{ $item->product->name }}">
+                        </a>
                     </div>
                     <div class="col-md-6">
-                        <h5>{{ $item->product->name }}</h5>
+                        <h5>
+                            <a href="{{ route('products.info', $item->product->id) }}" class="text-decoration-none text-dark">
+                                {{ $item->product->name }}
+                            </a>
+                        </h5>
                         <p class="text-muted">Số lượng: {{ $item->quantity }}</p>
                     </div>
                     <div class="col-md-4 text-end">

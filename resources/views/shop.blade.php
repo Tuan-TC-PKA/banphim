@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - DROP Keyboard Store</title>
+    <title>Cửa Hàng - DROP Keyboard Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
@@ -18,17 +18,17 @@
     <!-- Banner -->
     <div class="banner text-center text-white">
         <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Discover Your Perfect Setup</h1>
-            <p class="lead">Premium Mechanical Keyboards, Keycaps & Switches</p>
+            <h1 class="display-4 fw-bold mb-4">Khám Phá Thiết Lập Hoàn Hảo Của Bạn</h1>
+            <p class="lead">Bàn Phím Cơ, Keycap & Switch Cao Cấp</p>
         </div>
     </div>
 
     <!-- Categories -->
     <div class="category-wrapper">
         <div class="container">
-            <h2 class="section-title">Browse Categories</h2>
+            <h2 class="section-title">Duyệt Danh Mục</h2>
             <div class="row g-4">
-                @foreach(['keyboard' => 'Keyboards', 'keycap' => 'Keycaps', 'switch' => 'Switches'] as $key => $value)
+                @foreach(['keyboard' => 'Keyboard', 'keycap' => 'Keycap', 'switch' => 'Switch'] as $key => $value)
                 <div class="col-md-4">
                     <a href="{{ route('shop.category', $key) }}" class="text-decoration-none">
                         <div class="category-item shadow-sm">
@@ -49,14 +49,14 @@
             <!-- Filters Sidebar -->
             <div class="col-lg-3 mb-4">
                 <div class="filter-card">
-                    <h5 class="section-title">Filters</h5>
+                    <h5 class="section-title">Bộ Lọc</h5>
                     <form action="{{ route('shop.index') }}" method="GET">
                         <!-- Add search field at the top -->
                         <div class="mb-4">
-                            <label class="form-label">Search Products</label>
+                            <label class="form-label">Tìm Kiếm Sản Phẩm</label>
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control" 
-                                       value="{{ request('search') }}" placeholder="Enter product name...">
+                                       value="{{ request('search') }}" placeholder="Nhập tên sản phẩm...">
                                 <button class="btn btn-outline-secondary" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -64,15 +64,15 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label">Price Range</label>
+                            <label class="form-label">Khoảng Giá</label>
                             <div class="input-group mb-2">
-                                <span class="input-group-text bg-white">From</span>
+                                <span class="input-group-text bg-white">Từ</span>
                                 <input type="number" name="min_price" class="form-control" 
                                        value="{{ request('min_price') }}" placeholder="0" min="0">
                                 <span class="input-group-text bg-white">đ</span>
                             </div>
                             <div class="input-group">
-                                <span class="input-group-text bg-white">To</span>
+                                <span class="input-group-text bg-white">Đến</span>
                                 <input type="number" name="max_price" class="form-control" 
                                        value="{{ request('max_price') }}" placeholder="2000000" max="2000000">
                                 <span class="input-group-text bg-white">đ</span>
@@ -80,13 +80,13 @@
                         </div>
 
                         <div class="mb-4">
-                            <h6>Category</h6>
+                            <h6>Danh Mục</h6>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="category[]" value="all" 
                                        id="all" {{ in_array('all', (array)request('category')) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="all">All Products</label>
+                                <label class="form-check-label" for="all">Tất Cả Sản Phẩm</label>
                             </div>
-                            @foreach(['keyboard' => 'Keyboards', 'keycap' => 'Keycaps', 'switch' => 'Switches'] as $key => $value)
+                            @foreach(['keyboard' => 'Keyboard', 'keycap' => 'Keycap', 'switch' => 'Switch'] as $key => $value)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="category[]" value="{{ $key }}" 
                                        id="{{ $key }}" {{ in_array($key, (array)request('category')) ? 'checked' : '' }}>
@@ -99,11 +99,11 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="in_stock" id="inStock" 
                                        {{ request('in_stock') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="inStock">In Stock Only</label>
+                                <label class="form-check-label" for="inStock">Còn Hàng</label>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                        <button type="submit" class="btn btn-primary w-100">Áp Dụng Bộ Lọc</button>
                     </form>
                 </div>
             </div>
@@ -113,19 +113,19 @@
                 <!-- Sort Options -->
                 <div class="sort-section d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <span class="me-3">Sort by:</span>
+                        <span class="me-3">Sắp xếp theo:</span>
                         <form action="{{ route('shop.index') }}" method="GET" class="d-inline">
                             <select name="sort" class="form-select form-select-sm d-inline-block w-auto" onchange="this.form.submit()">
-                                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
-                                <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-                                <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-                                <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name: A to Z</option>
+                                <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Mới Nhất</option>
+                                <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Giá: Thấp đến Cao</option>
+                                <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Giá: Cao đến Thấp</option>
+                                <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Tên: A đến Z</option>
                             </select>
                         </form>
                     </div>
                     <small class="text-muted">
-                        Showing {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} 
-                        of {{ $products->total() ?? 0 }} products
+                        Hiển thị {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} 
+                        của {{ $products->total() ?? 0 }} sản phẩm
                     </small>
                 </div>
 
@@ -135,7 +135,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="product-card h-100 product-link" data-href="{{ route('products.info', $product->id) }}">
                             @if($product->stock_quantity <= 0)
-                                <span class="badge bg-danger badge-stock">Out of Stock</span>
+                                <span class="badge bg-danger badge-stock">Hết Hàng</span>
                             @endif
                             <div class="product-image">
                                 <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}">
@@ -151,7 +151,7 @@
                     </div>
                     @empty
                     <div class="col-12">
-                        <div class="alert alert-info">No products found.</div>
+                        <div class="alert alert-info">Không tìm thấy sản phẩm nào.</div>
                     </div>
                     @endforelse
                 </div>
