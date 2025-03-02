@@ -40,11 +40,11 @@
                 <div class="mb-3 p-3 bg-light rounded">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="mb-1"><strong><i class="fas fa-map-marker-alt me-2"></i>Địa chỉ giao hàng:</strong></p>
+                            <p class="mb-1"><strong><i class="fas fa-map-marker-alt me-2 text-danger"></i>Địa chỉ giao hàng:</strong></p>
                             <p class="mb-2">{{ $order->address }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-1"><strong><i class="fas fa-phone me-2"></i>Số điện thoại:</strong></p>
+                            <p class="mb-1"><strong><i class="fas fa-phone me-2 text-primary"></i>Số điện thoại:</strong></p>
                             <p class="mb-2">{{ $order->phone_number }}</p>
                         </div>
                     </div>
