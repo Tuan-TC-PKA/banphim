@@ -605,3 +605,133 @@ html, body {
     justify-content: space-between;
     padding: 0 30px;
 }
+
+
+/* Apply diagonal hover effect to all button types */
+
+/* Hero Button */
+.hero-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s ease-in-out;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.hero-button::before {
+    content: "";
+    position: absolute;
+    top: -300%;
+    left: -300%;
+    width: 700%;
+    height: 900%;
+    background: #ffc107; /* Màu vàng */
+    transform: translate(-100%, -100%) rotate(45deg); /* Đặt ngoài button */
+    transition: transform 0.7s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+.hero-button:hover {
+    color: #000 !important;
+    /* background-color: transparent !important; */
+}
+
+.hero-button:hover::before {
+    transform: translate(0, 0) rotate(45deg); /* Lướt phủ đầy button */
+    opacity: 1;
+}
+
+/* Shop Button */
+.shop-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s ease-in-out;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 12px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.shop-button::before {
+    content: "";
+    position: absolute;
+    top: -300%;
+    left: -300%;
+    width: 700%;
+    height: 900%;
+    background: #ffc107; /* Màu vàng */
+    transform: translate(-100%, -100%) rotate(45deg); /* Đặt ngoài button */
+    transition: transform 0.7s ease-out, opacity 1s ease-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+.shop-button:hover {
+    color: #000 !important;
+    /* background-color: transparent !important; */
+}
+
+.shop-button:hover::before {
+    transform: translate(0, 0) rotate(45deg); /* Lướt phủ đầy button */
+    opacity: 1;
+}
+
+/* Filter Button */
+.filter-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s ease-in-out;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    white-space: nowrap;
+}
+
+.filter-button::before {
+    content: "";
+    position: absolute;
+    top: -300%;
+    left: -300%;
+    width: 700%;
+    height: 900%;
+    background: #ffc107; /* Màu vàng */
+    transform: translate(-100%, -100%) rotate(45deg); /* Đặt ngoài button */
+    transition: transform 0.7s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+.filter-button:hover {
+    color: #000 !important;
+    /* background-color: transparent !important; */
+}
+
+.filter-button:hover::before {
+    transform: translate(0, 0) rotate(45deg); /* Lướt phủ đầy button */
+    opacity: 1;
+}

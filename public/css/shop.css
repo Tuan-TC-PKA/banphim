@@ -237,3 +237,51 @@ body {
         overflow-y: visible;
     }
 }
+
+/* Diagonal Hover Effect For Buttons */
+.btn-primary, 
+.btn-outline-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.4s ease-in-out;
+}
+
+/* Hiệu ứng nền */
+.btn-primary::before, 
+.btn-outline-primary::before {
+    content: "";
+    position: absolute;
+    top: -300%;
+    left: -300%;
+    width: 700%;
+    height: 900%;
+    background: #ffc107; /* Màu vàng */
+    transform: translate(-100%, -100%) rotate(45deg); /* Đặt ngoài button */
+    transition: transform 0.7s ease-out, opacity 1s ease-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+/* Primary Button Hover */
+.btn-primary:hover {
+    color: #000 !important;
+    background-color: transparent !important;
+    border-color: #000 !important;
+}
+
+.btn-primary:hover::before {
+    transform: translate(0, 0) rotate(45deg); /* Lướt phủ đầy button */
+    opacity: 1;
+}
+
+/* Outline Button Hover */
+.btn-outline-primary:hover {
+    color: #000 !important;
+    /* background-color: transparent !important; */
+}
+
+.btn-outline-primary:hover::before {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+}
