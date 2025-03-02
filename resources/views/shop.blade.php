@@ -26,10 +26,10 @@
     <!-- Categories -->
     <div class="category-wrapper">
         <div class="container">
-            <h2 class="section-title">Duyệt Danh Mục</h2>
+            <h2 class="section-title">Danh Mục Sản Phẩm</h2>
             <div class="row g-4">
                 @foreach(['keyboard' => 'Keyboard', 'keycap' => 'Keycap', 'switch' => 'Switch'] as $key => $value)
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4">
                     <a href="{{ route('shop.category', $key) }}" class="text-decoration-none">
                         <div class="category-item shadow-sm">
                             <img src="{{ asset('images/categories/' . $key . '.jpg') }}" alt="{{ $value }}">
@@ -132,7 +132,7 @@
                 <!-- Products -->
                 <div class="row g-4">
                     @forelse($products as $product)
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-12 col-sm-6 col-lg-4">
                         <div class="product-card h-100 product-link" data-href="{{ route('products.info', $product->id) }}">
                             @if($product->stock_quantity <= 0)
                                 <span class="badge bg-danger badge-stock">Hết Hàng</span>
