@@ -252,10 +252,10 @@ body {
 .btn-outline-primary::before {
     content: "";
     position: absolute;
-    top: -300%;
+    top: -450%;
     left: -300%;
     width: 700%;
-    height: 900%;
+    height: 2500%;
     background: #ffc107; /* Màu vàng */
     transform: translate(-100%, -100%) rotate(45deg); /* Đặt ngoài button */
     transition: transform 0.7s ease-out, opacity 1s ease-out;

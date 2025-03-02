@@ -688,7 +688,7 @@ html, body {
 
 .shop-button:hover {
     color: #000 !important;
-    background-color: transparent !important;
+    background-color: white !important;
 }
 
 .shop-button:hover::before {
@@ -728,7 +728,7 @@ html, body {
 
 .filter-button:hover {
     color: #ffffff !important;
-    background-color: transparent !important;
+    background-color: white !important;
 }
 
 .filter-button:hover::before {
