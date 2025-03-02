@@ -644,8 +644,8 @@ html, body {
 }
 
 .hero-button:hover {
-    color: #000 !important;
-    /* background-color: transparent !important; */
+    color: #000000 !important;
+    background-color: white !important;
 }
 
 .hero-button:hover::before {
@@ -688,7 +688,7 @@ html, body {
 
 .shop-button:hover {
     color: #000 !important;
-    /* background-color: transparent !important; */
+    background-color: transparent !important;
 }
 
 .shop-button:hover::before {
@@ -727,8 +727,8 @@ html, body {
 }
 
 .filter-button:hover {
-    color: #000 !important;
-    /* background-color: transparent !important; */
+    color: #ffffff !important;
+    background-color: transparent !important;
 }
 
 .filter-button:hover::before {
