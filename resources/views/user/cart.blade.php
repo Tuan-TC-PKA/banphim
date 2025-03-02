@@ -110,6 +110,20 @@
                                 <span>Tổng tiền hàng</span>
                                 <span id="subtotal">{{ number_format($subtotal) }}đ</span>
                             </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Phí vận chuyển</span>
+                                <span id="shipping-fee">0đ</span>
+                            </div>
+                            <div id="free-shipping-notice" class="d-none">
+                                <div class="alert alert-success py-2 mb-3">
+                                    <i class="fas fa-truck me-2"></i> Đơn hàng được miễn phí vận chuyển
+                                </div>
+                            </div>
+                            <div id="shipping-threshold-notice" class="d-none">
+                                <div class="alert alert-info py-2 mb-3">
+                                    <i class="fas fa-info-circle me-2"></i> Đặt thêm <span id="remaining-amount"></span> để được miễn phí vận chuyển
+                                </div>
+                            </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
                                 <strong>Tổng thanh toán</strong>
@@ -126,6 +140,7 @@
                                     <input type="text" class="form-control" id="phone" name="phone_number" required>
                                 </div>
                                 <input type="hidden" name="selected_items" id="selectedItems">
+                                <input type="hidden" name="shipping_fee" id="shippingFeeInput">
                                 <button type="submit" class="btn btn-danger w-100" id="checkoutButton" 
                                     @if(!session('buy_now_item')) disabled @endif>
                                     Thanh toán
@@ -245,31 +260,68 @@
             const selectedItemsInput = document.getElementById('selectedItems');
 
             function updateTotal() {
-                let total = 0;
+                let subtotal = 0;
                 const selectedItems = [];
-
+                const SHIPPING_FEE = 30000; // 30,000 VND
+                const FREE_SHIPPING_THRESHOLD = 2000000; // 2,000,000 VND
+                
                 productCheckboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseFloat(checkbox.dataset.price);
-                        // Get the current quantity from the input field
                         const quantityInput = checkbox.closest('.card-body').querySelector('input[name="quantity"]');
                         const quantity = parseInt(quantityInput.value);
-                        total += price * quantity;
+                        subtotal += price * quantity;
                         selectedItems.push(checkbox.value);
                     }
                 });
-
+                
+                // Calculate shipping fee
+                let shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD || subtotal === 0 ? 0 : SHIPPING_FEE;
+                let total = subtotal + shippingFee;
+                
+                // Format and display subtotal
                 document.getElementById('subtotal').textContent = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
-                }).format(total);
+                }).format(subtotal);
+                
+                // Format and display shipping fee
+                document.getElementById('shipping-fee').textContent = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(shippingFee);
+                
+                // Format and display total
                 document.getElementById('total').textContent = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(total);
-
+                
+                // Show/hide free shipping notice
+                const freeShippingNotice = document.getElementById('free-shipping-notice');
+                const shippingThresholdNotice = document.getElementById('shipping-threshold-notice');
+                const remainingAmount = document.getElementById('remaining-amount');
+                
+                if (subtotal >= FREE_SHIPPING_THRESHOLD && subtotal > 0) {
+                    freeShippingNotice.classList.remove('d-none');
+                    shippingThresholdNotice.classList.add('d-none');
+                } else if (subtotal > 0) {
+                    freeShippingNotice.classList.add('d-none');
+                    shippingThresholdNotice.classList.remove('d-none');
+                    remainingAmount.textContent = new Intl.NumberFormat('vi-VN', {
+                        style: 'currency', 
+                        currency: 'VND'
+                    }).format(FREE_SHIPPING_THRESHOLD - subtotal);
+                } else {
+                    freeShippingNotice.classList.add('d-none');
+                    shippingThresholdNotice.classList.add('d-none');
+                }
+                
                 selectedItemsInput.value = JSON.stringify(selectedItems);
                 checkoutButton.disabled = selectedItems.length === 0;
+
+                // Store shipping fee in hidden input for backend processing
+                document.getElementById('shippingFeeInput').value = shippingFee;
             }
 
             // Select All functionality

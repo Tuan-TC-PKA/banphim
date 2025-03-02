@@ -72,7 +72,26 @@
                 @endforeach
                 <hr>
                 <div class="text-end">
-                    <h5>Tổng tiền: {{ number_format($order->total_amount) }}đ</h5>
+                    @php
+                        $subtotal = $order->total_amount;
+                        $shippingFee = 0;
+                        
+                        // Check if the order was under 2 million VND
+                        if ($subtotal < 2000000 && $subtotal > 0) {
+                            $shippingFee = 30000;
+                            $subtotal = $order->total_amount + $shippingFee;
+                        }
+                    @endphp
+                    
+                    <div class="mb-2">Tổng tiền hàng: {{ number_format($order->total_amount) }}đ</div>
+                    
+                    @if($shippingFee > 0)
+                        <div class="mb-2">Phí vận chuyển: {{ number_format($shippingFee) }}đ</div>
+                    @else
+                        <div class="mb-2 text-success"><i class="fas fa-truck me-1"></i> Miễn phí vận chuyển</div>
+                    @endif
+                    
+                    <h5 class="mt-2">Tổng thanh toán: {{ number_format($subtotal) }}đ</h5>
                 </div>
             </div>
         </div>
