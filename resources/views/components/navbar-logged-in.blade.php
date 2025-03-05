@@ -1,19 +1,20 @@
-{{-- resources/views/components/navbar-logged-in.blade.php --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
         <a href="{{ route('user.dashboard') }}" class="navbar-brand">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="navbar-logo" height="40">
         </a>
 
-        <!-- Toggle button for mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <!-- SHOP link (always visible) -->
+        <div class="d-flex justify-content-start flex-grow-1">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">SHOP</a></li>
+            </ul>
+        </div>
 
-        <!-- Các icon luôn hiển thị -->
-        <div class="d-flex align-items-center order-lg-2">
-            <a href="{{ route('cart.index') }}" class="text-decoration-none">
+        <!-- Icons on the right side -->
+        <div class="d-flex align-items-center">
+            <a href="{{ route('cart.index') }}" class="text-decoration-none me-3">
                 <span class="nav-cart fas fa-shopping-cart"></span>
             </a>
             <div class="dropdown">
@@ -31,13 +32,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-
-        <!-- Menu items -->
-        <div class="collapse navbar-collapse order-lg-1 justify-content-center" id="navbarContent">
-            <ul class="navbar-nav w-100 mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="{{ route('shop.index') }}">SHOP</a></li>
-            </ul>
         </div>
     </div>
 </nav>
