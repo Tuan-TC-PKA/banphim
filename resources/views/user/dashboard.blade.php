@@ -34,7 +34,7 @@
 
         <div class="product-card product-card-2">
         <div class="card-content">
-                <h3 class="card-title">THE LỎD OF THE RINGS</h3>
+                <h3 class="card-title">THE LORD OF THE RINGS</h3>
                 <a href="{{ route('shop.index') }}"><button class="shop-button">BUY NOW</button></a>
             </div>
         </div>
