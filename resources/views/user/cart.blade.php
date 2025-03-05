@@ -156,7 +156,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Xử lý tăng giảm số lượng
+        // Modify the quantity change handler to avoid page reload
         document.querySelectorAll('.quantity-decrease, .quantity-increase').forEach(button => {
             button.addEventListener('click', async function(e) {
                 e.preventDefault();
@@ -164,22 +164,29 @@
                 const input = form.querySelector('input[name="quantity"]');
                 const currentValue = parseInt(input.value);
                 const maxValue = parseInt(input.getAttribute('max'));
+                const productRow = this.closest('.card');
+                const priceElement = productRow.querySelector('.text-end h6');
+                const productId = productRow.querySelector('.product-checkbox').value;
+                const productPrice = parseFloat(productRow.querySelector('.product-checkbox').dataset.price);
                 
+                // Calculate new quantity
+                let newQuantity = currentValue;
                 if(this.classList.contains('quantity-decrease')) {
                     if(currentValue > 1) {
-                        input.value = currentValue - 1;
+                        newQuantity = currentValue - 1;
                     }
                 } else {
-                    // Nếu người dùng đang cố tăng số lượng vượt quá kho hàng
                     if(currentValue >= maxValue) {
-                        // Hiển thị thông báo
                         showStockLimitAlert(maxValue);
-                        return; // Ngừng xử lý để không gửi request
+                        return;
                     } else {
-                        input.value = currentValue + 1;
+                        newQuantity = currentValue + 1;
                     }
                 }
-
+                
+                // Set new value
+                input.value = newQuantity;
+                
                 try {
                     const formData = new FormData(form);
                     formData.append('_method', 'PATCH');
@@ -195,7 +202,19 @@
                     });
 
                     if (response.ok) {
-                        window.location.reload();
+                        // Update price in row
+                        const newPrice = productPrice * newQuantity;
+                        priceElement.textContent = new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }).format(newPrice);
+                        
+                        // Update data attributes
+                        const checkbox = productRow.querySelector('.product-checkbox');
+                        checkbox.dataset.quantity = newQuantity;
+                        
+                        // Update totals without reloading
+                        updateTotal();
                     }
                 } catch (error) {
                     console.error('Error:', error);
@@ -260,13 +279,14 @@
             const checkoutForm = document.getElementById('checkoutForm');
             const selectedItemsInput = document.getElementById('selectedItems');
 
+            // Optimize the updateTotal function to handle the cart calculations
             function updateTotal() {
                 let subtotal = 0;
                 const selectedItems = [];
                 const SHIPPING_FEE = 30000; // 30,000 VND
                 const FREE_SHIPPING_THRESHOLD = 2000000; // 2,000,000 VND
                 
-                productCheckboxes.forEach(checkbox => {
+                document.querySelectorAll('.product-checkbox').forEach(checkbox => {
                     if (checkbox.checked) {
                         const price = parseFloat(checkbox.dataset.price);
                         const quantityInput = checkbox.closest('.card-body').querySelector('input[name="quantity"]');
@@ -280,25 +300,23 @@
                 let shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD || subtotal === 0 ? 0 : SHIPPING_FEE;
                 let total = subtotal + shippingFee;
                 
-                // Format and display subtotal
+                // Format and display amounts
                 document.getElementById('subtotal').textContent = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(subtotal);
                 
-                // Format and display shipping fee
                 document.getElementById('shipping-fee').textContent = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(shippingFee);
                 
-                // Format and display total
                 document.getElementById('total').textContent = new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(total);
                 
-                // Show/hide free shipping notice
+                // Handle shipping notices
                 const freeShippingNotice = document.getElementById('free-shipping-notice');
                 const shippingThresholdNotice = document.getElementById('shipping-threshold-notice');
                 const remainingAmount = document.getElementById('remaining-amount');
@@ -320,8 +338,6 @@
                 
                 selectedItemsInput.value = JSON.stringify(selectedItems);
                 checkoutButton.disabled = selectedItems.length === 0;
-
-                // Store shipping fee in hidden input for backend processing
                 document.getElementById('shippingFeeInput').value = shippingFee;
             }
 
