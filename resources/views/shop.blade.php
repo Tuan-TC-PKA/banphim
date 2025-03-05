@@ -85,9 +85,9 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="category[]" value="all" 
                                        id="all" {{ in_array('all', (array)request('category')) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="all">Tất Cả Sản Phẩm</label>
+                                <label class="form-check-label" for="all">All</label>
                             </div>
-                            @foreach(['keyboard' => 'Keyboard', 'keycap' => 'Keycap', 'switch' => 'Switch'] as $key => $value)
+                            @foreach(['keyboard' => 'Keyboards', 'keycap' => 'Keycaps', 'switch' => 'Switchs'] as $key => $value)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="category[]" value="{{ $key }}" 
                                        id="{{ $key }}" {{ in_array($key, (array)request('category')) ? 'checked' : '' }}>

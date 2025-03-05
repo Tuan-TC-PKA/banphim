@@ -49,6 +49,28 @@
             overflow-y: auto; /* Allow main content to scroll */
             padding: 2rem 1rem;
         }
+
+        .sidebar-section {
+            margin-bottom: 0.5rem;
+            border-left: 3px solid transparent;
+        }
+
+        /* For indicating active section */
+        .sidebar-section.active {
+            border-left-color: #3b82f6; /* Blue color */
+        }
+
+        /* Active menu item */
+        .sidebar-section a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #3b82f6;
+        }
+
+        /* Improve section headers */
+        .sidebar-section p {
+            border-bottom: 1px solid #374151;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 
@@ -56,8 +78,12 @@
     <div class="admin-layout">
         <header class="header px-4 py-2 shadow">
             <div class="flex justify-between">
-                <div class="flex items-center">
-                </div>
+            <div class="flex items-center">
+    <a href="{{ route('admin.dashboard') }}" class="flex items-center">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-auto">
+        <span class="text-lg font-semibold ml-5 text-gray-800">Admin Panel</span>
+    </a>
+</div>
 
                 <div class="flex items-center">
                     
@@ -107,7 +133,8 @@
 
         <div class="main-content">
             <div class="sidebar bg-gray-900 border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-                <div class="sidebar text-center bg-gray-900">
+                <div class="sidebar text-left bg-gray-900"> <!-- Changed text-center to text-left -->
+                    <!-- Admin Header -->
                     <div class="text-gray-100 text-xl">
                         <div class="p-2.5 mt-1 flex items-center">
                             <i class="bi bi-app-indicator px-2 py-1 rounded-md bg-blue-600"></i>
@@ -115,28 +142,48 @@
                         </div>
                         <div class="my-2 bg-gray-600 h-[1px]"></div>
                     </div>
-                    <!-- <div class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
-                        <i class="bi bi-search text-sm"></i>
-                        <input type="text" placeholder="Search"
-                            class="text-[15px] ml-4 w-full bg-transparent focus:outline-none" />
-                    </div> -->
-                    <!-- Thêm lại các lựa chọn -->
+                    
+                    <!-- Navigation Menu -->
                     <nav class="mt-4 text-white">
-                        <a href="{{ route('admin.dashboard') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Dashboard</a>
-                        {{-- Loại bỏ link "Product" cũ --}}
-                        {{-- <a href="{{ route('admin.products.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Products</a> --}}
-
-                        <p class="px-4 mt-4 mb-2 text-gray-400 uppercase text-xs">Sản phẩm</p> {{-- Section header --}}
-                        <a href="{{ route('admin.products.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">All Products</a>
-                        <a href="{{ route('admin.keycaps.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Keycaps</a>
-                        <a href="{{ route('admin.keyboards.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Keyboards</a>
-                        <a href="{{ route('admin.keyboard_switches.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Switches</a>
-
-                        <p class="px-4 mt-4 mb-2 text-gray-400 uppercase text-xs">Orders</p>
-                        <a href="{{ route('admin.orders.index') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Orders</a>
-
-                        <p class="px-4 mt-4 mb-2 text-gray-400 uppercase text-xs">Account</p>
-                        <a href="{{ route('profile.edit') }}" class="block p-2.5 rounded-md hover:bg-gray-700">Profile</a>
+                        <!-- Dashboard Section -->
+                        <div class="sidebar-section">
+                            <a href="{{ route('admin.dashboard') }}" class="block p-2.5 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                            </a>
+                        </div>
+                        
+                        <!-- Products Section -->
+                        <div class="sidebar-section mt-6">
+                            <p class="px-4 py-2 text-gray-400 uppercase text-xs font-semibold bg-gray-800">Sản phẩm</p>
+                            <a href="{{ route('admin.products.index') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-boxes mr-2"></i> All Products
+                            </a>
+                            <a href="{{ route('admin.keycaps.index') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-keyboard mr-2"></i> Keycaps
+                            </a>
+                            <a href="{{ route('admin.keyboards.index') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-desktop mr-2"></i> Keyboards
+                            </a>
+                            <a href="{{ route('admin.keyboard_switches.index') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-toggle-on mr-2"></i> Switches
+                            </a>
+                        </div>
+                        
+                        <!-- Orders Section -->
+                        <div class="sidebar-section mt-6">
+                            <p class="px-4 py-2 text-gray-400 uppercase text-xs font-semibold bg-gray-800">Orders</p>
+                            <a href="{{ route('admin.orders.index') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-shopping-cart mr-2"></i> Orders
+                            </a>
+                        </div>
+                        
+                        <!-- Account Section -->
+                        <!-- <div class="sidebar-section mt-6">
+                            <p class="px-4 py-2 text-gray-400 uppercase text-xs font-semibold bg-gray-800">Account</p>
+                            <a href="{{ route('profile.edit') }}" class="block p-2.5 pl-6 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-user-circle mr-2"></i> Profile
+                            </a>
+                        </div> -->
                     </nav>
                 </div>
             </div>

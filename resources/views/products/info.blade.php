@@ -157,7 +157,7 @@
                     <div class="tab-pane fade" id="shipping">
                         <h5>Chính sách vận chuyển</h5>
                         <p>Thời gian giao hàng: 2-4 ngày làm việc</p>
-                        <p>Phí vận chuyển: 30.000đ cho mọi đơn hàng</p>
+                        <p>Phí vận chuyển: 30.000đ cho đơn hàng dưới 2 triệu</p>
                     </div>
                 </div>
             </div>
