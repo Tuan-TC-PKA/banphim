@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
-        <a href="/" class="navbar-brand">
+        <a href="{{ route('welcome') }}" class="navbar-brand">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="navbar-logo" height="40">
         </a>
 

@@ -2,7 +2,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="navbar-logo" height="40">
+        <a href="{{ route('user.dashboard') }}" class="navbar-brand">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="navbar-logo" height="40">
+        </a>
 
         <!-- Toggle button for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
@@ -10,12 +12,11 @@
         </button>
 
         <!-- Các icon luôn hiển thị -->
-        <div class="d-flex align-items-center order-lg-2 ms-auto">
-            
-            <a href="{{ route('cart.index') }}" class="text-dark text-decoration-none">
-                <span class="nav-cart fas fa-shopping-cart mx-2"></span>
+        <div class="d-flex align-items-center order-lg-2">
+            <a href="{{ route('cart.index') }}" class="text-decoration-none">
+                <span class="nav-cart fas fa-shopping-cart"></span>
             </a>
-            <div class="dropdown ms-2">
+            <div class="dropdown">
                 <button class="btn nav-user-dropdown-trigger" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="nav-user fas fa-user"></span>
                 </button>

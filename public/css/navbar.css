@@ -184,3 +184,56 @@
         padding: 6px 14px;
     }
 }
+
+/* Enhanced icon styling */
+.nav-cart, .nav-user {
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+/* Hover effect for icons */
+.nav-cart:hover, .nav-user:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    color: #000;
+}
+
+/* Container for icons - adjust margin */
+.d-flex.align-items-center.order-lg-2 {
+    margin-right: 20px;
+    gap: 10px;
+}
+
+/* Custom button styling for user dropdown */
+.nav-user-dropdown-trigger {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.nav-user-dropdown-trigger:focus {
+    box-shadow: none;
+}
+
+/* Add a notification dot to cart if needed */
+.nav-cart {
+    position: relative;
+}
+
+/* Add this class dynamically when cart has items */
+.nav-cart.has-items::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

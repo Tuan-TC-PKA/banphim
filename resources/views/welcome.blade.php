@@ -81,24 +81,20 @@
         <h2 class="deskscapes-title" style="padding: 20px;">SHOP OUR DESKSCAPES</h2>
         <div class="deskscapes-grid">
             <div class="deskscape-item" style="grid-row-end: span 2;">
-                <img src="{{ asset('images/anh1.jpg') }}" alt="Deskscape 1">
+                <a href="{{ route('shop.index') }}">
+                    <img src="{{ asset('images/anh1.jpg') }}" alt="Deskscape 1">
+                </a>
             </div>
             <div class="deskscape-item">
-                <img src="{{ asset('images/anh2.jpg') }}" alt="Deskscape 2">
+                <a href="{{ route('shop.index') }}">
+                    <img src="{{ asset('images/anh2.jpg') }}" alt="Deskscape 2">
+                </a>
             </div>
             <div class="deskscape-item">
-                <img src="{{ asset('images/anh3.jpg') }}" alt="Deskscape 3">
+                <a href="{{ route('shop.index') }}">
+                    <img src="{{ asset('images/anh3.jpg') }}" alt="Deskscape 3">
+                </a>
             </div>
-            <!-- <div class="deskscape-item" style="grid-row-end: span 1.5;">
-                <img src="{{ asset('images/anh4.jpg') }}" alt="Deskscape 4">
-            </div>
-            <div class="deskscape-item" style="grid-row-end: span 2;">
-                <img src="{{ asset('images/anh5.jpg') }}" alt="Deskscape 5">
-            </div>
-            <div class="deskscape-item">
-                <img src="{{ asset('images/anh4.jpg') }}" alt="Deskscape 6">
-            </div> -->
-             <!-- Add more deskscape items here, adjust grid-row-end style as needed -->
         </div>
     </section>
 
