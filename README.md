@@ -72,38 +72,37 @@ php artisan serve
 
 ## Hình ảnh website
 ### Trang chủ
-![Image](https://github.com/user-attachments/assets/af2252c7-0c9b-4fc5-9ae5-900fb5d689ff)
+![image](https://github.com/user-attachments/assets/1cff7415-ed67-4fa5-89bd-6312890359c4)
 
 ### Trang shop
-![Image](https://github.com/user-attachments/assets/3d512006-bdc9-4a5f-916e-ca3d70e02f59)
-Vui lòng đọc hướng dẫn đóng góp trước khi gửi pull request.
+![image](https://github.com/user-attachments/assets/7edc4806-919e-4228-bbec-56e78226c6ba)
 
 ### Chi tiết sản phẩm
-![Image](https://github.com/user-attachments/assets/c7feb6c0-50a2-470f-9570-14ba24b5a7f5)
+![image](https://github.com/user-attachments/assets/5b296312-0f43-4c0a-ac77-5c147ecd09a0)
 
 ### Giỏ hàng
-![Image](https://github.com/user-attachments/assets/fb2a4295-505a-49ba-98c0-bc5a07748f1c)
+![image](https://github.com/user-attachments/assets/5a6c4706-ca18-4f92-991e-7414d07097c2)
 
 ### Lịch sử mua hàng
-![Image](https://github.com/user-attachments/assets/fb2a4295-505a-49ba-98c0-bc5a07748f1c)
+![image](https://github.com/user-attachments/assets/2529b2ff-6882-44cb-910a-6c0e867313bd)
 
 ### Admin dashboard
-![Image](https://github.com/user-attachments/assets/10959f40-1969-4b39-9f45-86f0e2e34de7)
+![image](https://github.com/user-attachments/assets/cd1a818f-7a28-40fc-8320-f971ee27c304)
 
 ### All products
-![Image](https://github.com/user-attachments/assets/bc6a60bd-1219-4e27-9369-cde7a0e15c77)
+![image](https://github.com/user-attachments/assets/aedf76bb-2923-4302-a9b6-c8c88c11e77b)
 
 ### Keycaps
-![Image](https://github.com/user-attachments/assets/a4c82780-a000-4a51-931a-bbbec08f2265)
+![image](https://github.com/user-attachments/assets/a75b7c6e-8611-47e7-beaa-8aedcf54f19c)
 
 ### Keyboards
-![Image](https://github.com/user-attachments/assets/424cf833-9762-4d1c-bcb5-879646c0400b)
+![image](https://github.com/user-attachments/assets/eba69a46-e163-4b0b-9dda-30896095a658)
 
 ### Switch
-![Image](https://github.com/user-attachments/assets/71a55e1d-f2a6-4064-81f7-8eaca4916aba)
+![image](https://github.com/user-attachments/assets/34a7e204-2646-44d1-bdcc-1dcea6c211e2)
 
 ### Order
-![Image](https://github.com/user-attachments/assets/76b65fc9-38b6-4b38-8096-e7d146357915)
+![image](https://github.com/user-attachments/assets/30f70c6d-1b41-49a1-82dc-15e5071f9574)
 
 
 ## Deployment
