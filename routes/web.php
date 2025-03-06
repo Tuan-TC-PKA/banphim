@@ -66,11 +66,11 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
             Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
         });
 
-        Route::get('user/ordersHistory', [OrderHistoryController::class, 'index'])
+    Route::get('user/ordersHistory', [OrderHistoryController::class, 'index'])
          ->name('user.ordersHistory');
         
          //
-         Route::get('/user/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('user.dashboard');
+    Route::get('/user/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('user.dashboard');
          //
 });
 
